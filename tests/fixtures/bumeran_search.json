@@ -1,0 +1,1051 @@
+{
+ "number": 0,
+ "size": 20,
+ "total": 84,
+ "content": [
+  {
+   "id": 1118517128,
+   "titulo": "Analista de datos",
+   "detalle": "Somos una empresa importadora y comercializadora de insumos para las industrias avícola, pecuaria, ganadera, farmaveterinaria y alimentaria. Nuestra compañía nace en octubre de 2016, logrando un gran crecimiento en los últimos años, gracias a nuestros altos estándares de calidad y atención; y a la experiencia de más de 30 años de nuestro fundador en el sector veterinario. Buscamos:Un/a Analista de Datos, con experiencia en manejo de datos, dominio avanzado de Excel y Power BI, orientado a la elaboración de reportes y dashboards comerciales.Lo que harás: Construcción y actualización de dashboards en Power BI. Elaboración y actualización de reportes en Excel. Consolidación de base de datos comerciales. Estructuración y organización de información comercial Requisitos:  Egresado o bachiller de Ingeniería industrial, Ingeniería de sistemas, administración o carreras afines Experiencia mínima de 2 años en posiciones similares. Excel avanzado (indispensable) Manejo de base de datos y grandes volúmenes de información Tablas dinámicas y fórmulas avanzadas Macros VBA (deseable) Power BI (Indispensable) Construcción y elaboración de dashboards Conocimientos básicos de CRM Beneficios  Capacitación y desarrollo profesional. Oportunidades de crecimiento dentro de la empresa. Horas libres por cumpleaños Seguro Vida Ley Horario administrativo y presencial en Surco",
+   "aptoDiscapacitado": false,
+   "idEmpresa": 13084653,
+   "empresa": "GROT DEL PERU",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_13084653_bum_vb4f3eadb.jpg",
+   "validada": false,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "11-11-2026 09:11:57",
+   "fechaPublicacion": "11-11-2026",
+   "fechaModificado": "11-11-2026 09:11:57",
+   "planPublicacion": {
+    "id": 20,
+    "nombre": "Agrupados_60Full"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 6,
+   "idSubarea": 2629,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Santiago de Surco, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": null,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": false,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": true,
+   "tipoAviso": "home"
+  },
+  {
+   "id": 1118511646,
+   "titulo": "Analista de Datos TI",
+   "detalle": "En Valtx, empresa con 25 años de experiencia en el mercado peruano, cuyo objetivo principal es convertirse en un socio estratégico, mediante soluciones tecnológicas en los diversos aspectos de los procesos de negocios; el desarrollo, implementación y mantenimiento de aplicaciones e infraestructura tecnológica para el negocio; y consultoría en diversos procesos de transformación, nos encontramos en la búsqueda de un Analista de Datos.¿Qué responsabilidades tendrá? Recopilar, extraer, procesar y consolidar información proveniente de diferentes fuentes de datos y sistemas empresariales.  Realizar análisis exploratorios de datos para identificar tendencias, patrones, desviaciones y oportunidades de mejora.  Desarrollar, implementar y mantener dashboards e informes interactivos utilizando Power BI.  Construir y optimizar consultas SQL para la extracción, consolidación y análisis de información almacenada en bases de datos.  Desarrollar medidas, indicadores y cálculos utilizando DAX, así como realizar transformaciones y depuración de información mediante Power Query.  Elaborar y mantener indicadores de gestión (KPI), reportes comerciales y operativos, facilitando el seguimiento del desempeño del negocio.¿Qué requisitos necesito?Formación académica y profesional: Bachiller en Ing Software, Sistemas, Informatica o afines.Experiencia: 2+ años en análisis de datos, Business Intelligence o Data Analytics. Power BI (Intermedio/Avanzado) DAX  Power Query  SQL  Microsoft Excel  Análisis y visualización de datos Elaboración de dashboards Indicadores de gestión (KPI)  Análisis estadístico y exploratorio Deseable:  Conocimiento en BigQuery  Google Cloud Platform (GCP)  Microsoft Azure  Python Condiciones de trabajo: Trabajo presencial L-V (Magdalena del Mar)Beneficios: Planilla Completa desde el 1er día de trabajo. EPS Convenios Corporativos. Crecimiento y desarrollo profesional.¿Por qué Valtx?Porque creemos que el talento se potencia con propósito. En Valtx no solo desarrollamos tecnología, transformamos negocios y acompañamos a nuestros colaboradores en su desarrollo profesional, promoviendo una cultura colaborativa, cercana y orientada a la excelencia.¿Estás listo para construir soluciones que marcan la diferencia?Postula hoy y forma parte de un equipo que evoluciona contigo.",
+   "aptoDiscapacitado": true,
+   "idEmpresa": 2185240,
+   "empresa": "VALTX",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_2185240_bum_vc919b9f5.jpg",
+   "validada": true,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "06-11-2026 08:56:11",
+   "fechaPublicacion": "06-11-2026",
+   "fechaModificado": "11-11-2026 10:51:08",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 19,
+   "idSubarea": 2647,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Magdalena del Mar, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": null,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": true,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118516406,
+   "titulo": "Analista de datos de Cosecha",
+   "detalle": "Grupo Vanguard Internacional con presencia en 9 países y más de 30 años de experiencia en producción, exportación y comercialización de uva de mesa se encuentra en búsqueda del mejor talento:ANALISTA DE DATA DE COSECHAMISIÓN DEL CARGOBrindar soporte al área de Cosecha en la planificación y coordinación de sus actividades, mediante el análisis y presentación de información relacionada con indicadores de gestión, tales como rendimientos, áreas ejecutadas frente a las planificadas, consumo de recursos y otros indicadores operativos.REQUISITOS Bachiller o titulado en Ingeniería, Administración o carreras afines. Experiencia mínima de 1 año en puestos similares. Manejo de Power BI. Disponibilidad para residir en Pisco.CONOCIMIENTOS TÉCNICOS Manejo de Power BI. Elaboración de dashboards y reportes de gestión (deseable). Elaboración de presentaciones para comités. Manejo de AutoCAD y gestión de archivos KMZ (deseable).FUNCIONES PRINCIPALES Recopilar, analizar y tabular información del área de Cosecha, como rendimientos y uso de recursos, para la revisión semanal de estrategias de gestión con la Jefatura y Gerencia. Mantener y actualizar los avances de recorrido de Cosecha, utilizando la información proporcionada por los supervisores de Producción y coordinadores de Cosecha. Elaborar informes sobre los indicadores del área y estadísticas comparativas, integrando información de diferentes fuentes. Actualizar y realizar el seguimiento semanal de los indicadores de consumo de materiales y mano de obra asignados en el presupuesto.BENEFICIOS Línea de carrera. Almuerzo cubierto al 100%. Movilidad de acercamiento. Buen clima laboral. Pertenecer a una empresa líder en la agroindustria.En cumplimiento de la Ley N.° 26772 y sus modificatorias, promovemos la igualdad de oportunidades y la no discriminación en nuestros procesos de selección. La evaluación se realiza en función de las competencias, experiencia y requisitos del puesto.",
+   "aptoDiscapacitado": false,
+   "idEmpresa": 13299179,
+   "empresa": "Grupo Vanguard Internacional",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_13299179_bum_v3ea8059c.jpg",
+   "validada": true,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "10-11-2026 15:14:02",
+   "fechaPublicacion": "10-11-2026",
+   "fechaModificado": "10-11-2026 15:14:02",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 16,
+   "idSubarea": 32,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Pisco, Ica",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": null,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": true,
+   "salarioObligatorio": true,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118500251,
+   "titulo": "Analista de Datos",
+   "detalle": "Por encargo de nuestro cliente, nos encontramos en búsqueda de un Analista de Datos para uno de nuestros principales clientes.Perfil solicitado Titulado o egresado de ingeniería estadística, ingeniería de sistemas o carreras afines relacionados con ciencia, tecnología o matemáticas 2 años de experiencia realizando funciones similares.Funciones Analizar e interpretar tendencias o patrones en conjuntos complejos de datos clínicos  Revisión de indicadores de rendimiento  Preparar con dashboards",
+   "aptoDiscapacitado": false,
+   "empresa": "Confidencial",
+   "confidencial": true,
+   "logoURL": null,
+   "validada": null,
+   "empresaPro": null,
+   "fechaHoraPublicacion": "28-10-2026 14:21:28",
+   "fechaPublicacion": "28-10-2026",
+   "fechaModificado": "04-11-2026 16:42:21",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 6,
+   "idSubarea": 2628,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Lima, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": true,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118517191,
+   "titulo": "Analista Jr. de Selección y Datos",
+   "detalle": "&#x1f680; ¡Únete al equipo de Grupo Tawa!Nos encontramos en la búsqueda de un/a Analista Jr. de Selección y Datos – Ing. Industrial / Admin.Si cuentas con experiencia en selección y te interesa desarrollarte en la gestión y seguimiento de proyectos, análisis de información y coordinación de equipos, ¡esta oportunidad puede ser para ti! &#x1f64c;&#x1f50e; ¿Qué buscamos? Egresados/as de Ingeniería Industrial, Administración o carreras afines. Experiencia mínima de 1 año en procesos de selección y/o proyectos de Atracción del Talento. Conocimiento del proceso de reclutamiento y selección end to end. Deseable experiencia realizando seguimiento de procesos, proyectos o indicadores. Manejo de Excel a nivel intermedio. Interés por el uso de Inteligencia Artificial y herramientas digitales para optimizar procesos, análisis y elaboración de entregables. Capacidad de organización, análisis, comunicación y seguimiento.&#x1f4bc; ¿Cuáles serán tus principales retos? Realizar el seguimiento integral de los proyectos de selección asignados, asegurando el cumplimiento de avances, tiempos y entregables. Coordinar y dar seguimiento al trabajo de los consultores freelance que participan en los diferentes procesos de selección. Consolidar, ordenar y validar la información proporcionada por el equipo para mantener actualizados los avances de cada proyecto. Elaborar reportes, presentaciones, Long List, Short List y otros entregables para clientes. Analizar el estado de los procesos e identificar alertas, pendientes y oportunidades de mejora. Participar directamente en determinados procesos de selección cuando el proyecto lo requiera. Coordinar información y avances con el equipo interno y clientes. Utilizar herramientas de Inteligencia Artificial para optimizar la consolidación de información, análisis, reportes y presentaciones. Proponer mejoras y automatizaciones que permitan hacer más eficiente la gestión de los proyectos de selección.&#x1f31f; ¿Qué ofrecemos? Ingreso a planilla con todos los beneficios de ley. EPS cubierta al 100%. Oportunidades de aprendizaje y desarrollo. Descuentos y beneficios corporativos. Participación en proyectos de selección para diferentes clientes. Espacio para desarrollar conocimientos en gestión de proyectos, selección, análisis de información, automatización e Inteligencia Artificial.&#x2728; Si te interesa combinar tu experiencia en Atracción del Talento con la gestión de proyectos, tecnología y análisis de información, ¡queremos conocerte!",
+   "aptoDiscapacitado": false,
+   "idEmpresa": 10071318,
+   "empresa": "Grupo Tawa",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_10071318_bum_ve7677a17.jpg",
+   "validada": true,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "11-11-2026 09:39:39",
+   "fechaPublicacion": "11-11-2026",
+   "fechaModificado": "12-11-2026 09:29:53",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 17,
+   "idSubarea": 2565,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Magdalena del Mar, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": 3.71,
+   "modalidadTrabajo": "Híbrido",
+   "tienePreguntas": true,
+   "salarioObligatorio": true,
+   "altaRevisionPerfiles": true,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118516814,
+   "titulo": "Analista de Arquitectura y Seguridad de Datos",
+   "detalle": "En Edata Group, desarrollamos soluciones tecnológicas eficientes e innovadoras en tecnologías de la información y comunicaciones. Nos encontramos en la búsqueda de un Analista de Arquitectura y Seguridad de Datos para integrarse a un importante proyecto en el sector bancario.Misión del Puesto: Evaluar, validar y auditar técnicamente las iniciativas que involucran datos, analítica e integraciones, asegurando el diseño de modelos eficientes, la identificación proactiva de brechas de seguridad y la aplicación estricta de controles de protección de la información en los flujos de datos.Requisitos Indispensables: Formación: Bachiller o Titulado en Ingeniería de Sistemas, Informática, Ciencias de la Computación o carreras afines. Experiencia acumulada: Mínimo 02 años en funciones de Arquitectura de Datos, Ingeniería de Datos o Seguridad de Datos. Revisión de Arquitectura: Experiencia demostrable en evaluación y validación de arquitecturas analíticas (Data Warehouse, Data Lake, Lakehouse). Seguridad y Flujos de Datos: Experiencia en diseño e implementación de controles de seguridad de datos: cifrado (en reposo y tránsito), gestión de identidades/controles de acceso (IAM), protección de datos personales y análisis de flujos para detección de brechas. Modelado e Integraciones: Experiencia en diseño de modelado de datos (lógico y físico), así como en la construcción o validación de procesos ETL / ELT. Entornos Cloud: Manejo o experiencia práctica en entornos AWS y/o GCP.Conocimientos Deseables: Nociones o experiencia en Gobierno de Datos y marcos de referencia (DAMA, Ley de Protección de Datos Personales - LPDP). Conocimiento o nociones en modelado de amenazas (Threat Modeling), DevSecOps o DevDataOps.Beneficios: EPS cubierta al 100% en plan base para el titular y un derechohabiente. Seguro Oncológico. Vida Ley. Oportunidad de desarrollo y crecimiento profesional. Buen ambiente laboral.",
+   "aptoDiscapacitado": false,
+   "idEmpresa": 13027816,
+   "empresa": "GRUPO ELECTRODATA SAC",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_13027816_bum_vdff0020d.jpg",
+   "validada": false,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "10-11-2026 18:34:20",
+   "fechaPublicacion": "10-11-2026",
+   "fechaModificado": "12-11-2026 09:48:59",
+   "planPublicacion": {
+    "id": 20,
+    "nombre": "Agrupados_60Full"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 19,
+   "idSubarea": 105,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Surquillo, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": 3.08,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": true,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": true,
+   "postulacionRapida": false,
+   "tipoAviso": "home"
+  },
+  {
+   "id": 1118512985,
+   "titulo": "Analista de datos / Business Intelligence",
+   "detalle": "Somos el equipo experto en servicios empresariales digitales, con presencia en 100 países y brindando servicios en 170 mercados. Conectamos al mundo y sus diferentes culturas en +400 idiomas y dialectos. Certificados por Great Place To Work&#xae; como uno de los mejores lugares para trabajar en Perú. En TP, defendemos la diversidad, la equidad y la inclusión en cada conexión. Valoramos las perspectivas e identidades únicas de nuestros clientes y colaboradores, fomentando una cultura inclusiva en donde todas las voces son escuchadas, valoradas y respetadas. Nuestro compromiso con la diversidad fortalece nuestras conexiones, genera un impacto significativo y construye un mundo más equitativo.Ready to level up? ¡Hazlo con el TOP Team!Requisitos: Bachiller/ egresado/ estudiante de últimos ciclos en Administración, Ingeniería o campos relacionados 6 meses de experiencia en analisis de datos Inglés Intermedio (B2+) Excel AvanzadoBeneficios: Sueldo competitivo + Planilla completa + Descuentos y beneficios Corporativos Oportunidad de línea de carreraFunciones: Monitorear, controlar y mejorar los indicadores de calidad, productividad y resolución en el primer contacto. Presentar informes de resultados al Ejecutivo de Cuentas, director de Operaciones y Cliente. Analizar bases de datos extraídas de la aplicación del cliente, basándose en resultados anteriores, diseñar estrategias para generar valor al menor costo posible para lograr los objetivos del programa. Analizar la evolución de los indicadores de productividad, calidad, eficiencia para cada programa, junto con el AM o Director de la campaña específica, a través de cortes periódicos y en tiempo real, generando alertas respectivas que permitan la toma de decisiones operativas. Calcular los targets mensuales de acuerdo con las ventas requeridas por el cliente . Generación de reportes a requerimiento.Horarios: Lunes a Viernes de 8am a 6pm (Descansos Sábado y Domingo) Presencial en la sede de MirafloresRompe barreras culturales y forma parte del equipo de interacción más grande del mundo. En Perú, estamos certificados por Great Place to Work como una de las mejores empresas para trabajar en el país.",
+   "aptoDiscapacitado": false,
+   "idEmpresa": 13114316,
+   "empresa": "TP PERÚ",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_13114316_bum_vd0ac69f4.jpg",
+   "validada": true,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "06-11-2026 18:11:19",
+   "fechaPublicacion": "06-11-2026",
+   "fechaModificado": "10-11-2026 15:05:50",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 1,
+   "idSubarea": 22,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Miraflores, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": 3.15,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": true,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118509973,
+   "titulo": "Analista de Datos - BI Analyst",
+   "detalle": "Analista de Datos&#x1f4cd;Ubicación: Callao&#x2705; Lo que buscamos:&#x1f4da; Formación: Ingeniería de Sistemas, Computación e Informática.Experiencia: 03 años como Analista de Datos o afinesConocimientos: SAP (funcional) Gestión de proyectos Power BI AWS Cloud Consultas Base de datos (SQL Server) ETL SQL Server, Python Nivel de Inglés intermedio&#x1f3af; Funciones principales: Relevar, documentar y formalizar requerimientos de información con usuarios clave de las gerencias, traduciendo necesidades de negocio en especificaciones técnicas de queries y reportes sobre tablas SAP estándar. Diseñar y construir queries sobre tablas SAP estándar (BKPF/BSEG, VBAK/VBRK, EKKO/EKPO, MSEG, COEP/COSP, entre otras) aplicando reglas de negocio definidas y validadas con el área solicitante. Desarrollar y publicar dashboards ejecutivos en Power BI, conectados a CDS Views o queries analíticas, para el seguimiento de KPIs de cada gerencia. Ejecutar la validación y conciliación de cifras entre los reportes generados y los saldos contables o registros transaccionales de SAP, garantizando la integridad y consistencia de la información. Dar soporte y atender consultas de los usuarios sobre la interpretación de reportes y el origen de las cifras, trazando la data desde el dashboard hasta el documento fuente. Otras funciones inherentes al área.&#x1f31f; BENEFICIOS: Ingreso a planilla desde el primer día de labores. Alimentación cubierta al 100%. Movilidad.",
+   "aptoDiscapacitado": false,
+   "empresa": "Confidencial",
+   "confidencial": true,
+   "logoURL": null,
+   "validada": null,
+   "empresaPro": null,
+   "fechaHoraPublicacion": "05-11-2026 08:55:16",
+   "fechaPublicacion": "05-11-2026",
+   "fechaModificado": "06-11-2026 09:56:38",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 19,
+   "idSubarea": 2647,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Callao, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "modalidadTrabajo": "Híbrido",
+   "tienePreguntas": true,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118502556,
+   "titulo": "Analista de Datos y Analítica",
+   "detalle": "¡SÉ PARTE DE GRUPO ROKY’S Y VIVE LA EXPERIENCIA!En Grupo Roky’s, cadena de restaurantes con presencia a nivel nacional y marcas como Roky’s, Rodizio, Brass, Viena, Corner, Asado Argentino, Scencia, Limaq, Rida y Princes, nos encontramos en la búsqueda de un ANALISTA DE DATOS Y ANALÍTICA para unirse a nuestro equipo.Requisitos Bachiller o titulado en Ingeniería de Sistemas, Ingeniería Informática, Ingeniería Industrial, Estadística, Ciencia de Datos, Economía o carreras afines, con formación sólida en análisis de datos. Experiencia mínima de 2 años en posiciones de análisis de datos, Business Intelligence, analítica de negocios o funciones similares dentro de empresas retail, restaurantes, consumo masivo, operaciones de múltiples sedes o entornos con alto volumen transaccional. Dominio en el desarrollo de tableros, consultas a bases de datos y automatización de reportes. Manejo de Excel a nivel avanzado. SQL, Power BI, Python a nivel intermedio.Funciones: Diseñar, desarrollar y mantener soluciones de análisis de datos que fortalezcan la gestión de Auditoría Interna, mediante la integración de información de los sistemas, la generación de indicadores y alertas de riesgo, y la identificación de transacciones o situaciones que requieran revisión. Identificar, extraer, depurar, transformar y relacionar información proveniente de los sistemas comerciales, inventarios, facturación, caja, compras y otras fuentes relevantes. Diseñar e implementar indicadores de riesgo y tableros de seguimiento a procesos críticos. Generar poblaciones de transacciones y seleccionar muestras dirigidas según criterios de riesgo definidos con los auditores. Brindar soporte analítico a auditorías de procesos y encargos especiales, incluyendo la identificación de patrones, excepciones y cuantificación de impactos.Beneficios Ingreso a planilla desde el primer día, con todos los beneficios de ley (CTS, gratificaciones, vacaciones, Essalud, asignación familiar si corresponde). Remuneración acorde al mercado. Pagos quincenales. Descuentos corporativos.Si estás interesado y cumples con el perfil, no dudes en postular dejando tu CV. ¡Éxitos!",
+   "aptoDiscapacitado": false,
+   "idEmpresa": 13137673,
+   "empresa": "GRUPO ROKYS",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_13137673_bum_v5934319a.jpg",
+   "validada": true,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "29-10-2026 18:51:49",
+   "fechaPublicacion": "29-10-2026",
+   "fechaModificado": "30-10-2026 12:10:18",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 19,
+   "idSubarea": 2647,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Distrito de San Luis, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": null,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": true,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118502228,
+   "titulo": "Analista de Datos de Fidelización",
+   "detalle": "¡Sé parte del primer Instituto de Salud del Perú!En el Instituto Carrión estamos en la búsqueda de nuestro próximo ANALISTA DE DATOS DE FIDELIZACION, un profesional íntegro y con espíritu de superación.Nuestro (a) próximo (a) colaborador debe contar con: Formación: Bachiller o Titulado de las carreras de Ingeniería de Sistemas, Ingeniería Industrial, Economía, Estadística, Ciencia de Datos, Ingeniería Empresarial, Administración o afines. (Indispensable). Experiencia mínima de 03 años como Analista de Datos de Fidelización en el sector educativo, Salud, Banca y Seguros (Indispensable). Diplomado o maestría en data analytics, big data, BI, data science u otros relacionados (deseable). Conocimientos en SQL para manejo de bases de datos y Big Data. Herramientas de visualización de datos (Power BI, Tableau o similares). Herramientas de Inteligencia Artificial (GPT, Copilot, Gemini, otras). Conocimientos en MS Office a nivel avanzado.Estas serán tus principales funciones: Consolidar, depurar y analizar la data que proveniente de distintas fuentes: intranet, LMS, contact center, encuestas y entre otros, garantizando la calidad, consistencia y confiabilidad de la data. Mantener y mejorar las bases de datos para el registro de las gestiones realizadas por el equipo de sedes y Fidelización. Identificar patrones, tendencias, alertas y causas raíz relacionadas con los indicadores de retención, satisfacción, inasistencia, baja participación o dificultades en la experiencia educativa. Diseñar y mantener dashboards interactivos para el monitoreo de indicadores clave. Implementar soluciones para optimizar y automatizar el procesamiento y análisis de datos. Monitorear continuamente los KPIs vinculados a la experiencia del estudiante, alertando sobre desviaciones y proponiendo mejoras oportunamente. Traducir hallazgos analíticos en recomendaciones claras y accionables para las áreas involucradas.Horario: Lunes a Viernes 9:00 am a 6:00 pm (Hibrido)¿Qué te ofrecemos? Todos los beneficios de ley: 14 sueldos al año, CTS, vacaciones, utilidades, entre otros. Descuentos exclusivos para ti y tu familia en nuestras instituciones educativas. Programas de bienestar integral y equilibrio entre la vida personal y laboral. Descuentos corporativos en más de 50 establecimientos y servicios.¡Postula hoy y juntos transformemos vidas a través de una experiencia educativa excepcional!En el Instituto Daniel Alcides Carrión nos caracterizamos por ser una organización socialmente responsable, que no consiente actos de discriminación en nuestros procesos y velamos el cumplimiento de la ley N° 29973.En el I. Carrion estamos comprometidos en brindar igualdad de oportunidades para todos los candidatos(as) respetando la inclusión, diversidad y fomentando un espacio libre de discriminación.",
+   "aptoDiscapacitado": false,
+   "idEmpresa": null,
+   "empresa": "INSTITUTO CARRIÓN",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_10007529_aviso_1118502228_bum_v9fd5f2db.jpg",
+   "validada": null,
+   "empresaPro": null,
+   "fechaHoraPublicacion": "29-10-2026 15:37:02",
+   "fechaPublicacion": "29-10-2026",
+   "fechaModificado": "12-11-2026 10:36:45",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 19,
+   "idSubarea": 2647,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Jesús María, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": null,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": true,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": true,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118516756,
+   "titulo": "Analista de Calidad de Datos - Rubro Bancario",
+   "detalle": "Si buscas un reto donde puedas impulsar la calidad y confiabilidad de los datos de una organización, diseñar controles que aseguren la integridad de la información y conectar las necesidades del negocio con soluciones tecnológicas, ¡esta oportunidad es para ti!Nos encontramos en búsqueda de un/a Analista de Calidad de Datos - Rubro BancarioObjetivo del puestoDiseñar, implementar y monitorear el modelo de calidad de datos del banco, definiendo reglas, indicadores y controles que aseguren la exactitud, completitud, consistencia y oportunidad de la información. Actuar como enlace entre las áreas de negocio y TI para identificar problemas de calidad, analizar sus causas y acompañar a los responsables de los datos en su corrección. Contribuir así al cumplimiento de las políticas de gobierno de datos, a la confiabilidad de los reportes regulatorios y al uso de la información para la toma de decisiones.Funciones Definir, documentar e implementar reglas de calidad (exactitud, completitud, consistencia, unicidad y oportunidad) sobre los datos críticos, validándolas con los responsables del negocio. Monitorear la calidad de la información crítica mediante las reglas definidas, identificar desviaciones y alertar oportunamente a las áreas involucradas. Analizar la causa raíz de los problemas de calidad detectados y coordinar con las áreas de negocio, TI, Riesgos y Cumplimiento los planes de corrección y su seguimiento. Validar la calidad de la información de los reportes regulatorios antes de su envío, verificando su estructura, completitud y consistencia frente a las reglas de la SBS y otras fuentes de referencia. Elaborar y mantener el diccionario de datos y las definiciones de negocio de los datos críticos, en coordinación con sus responsables. Apoyar en la clasificación de datos (sensibles, confidenciales, públicos) conforme a normativas internas y regulatorias. Apoyar en la elaboración y actualización de políticas, estándares y lineamientos de gobierno y calidad de datos.Requisitos Bachiller en Sistemas, Informática, Estadística, Economía o afines Conocimiento de marcos de gobierno y calidad de datos (DAMA-DMBOK, ISO 8000 o ISO/IEC 25012). Conocimiento de Bantotal (Administración funcional, consultas y análisis de información en Bantotal). Experiencia de 2 años en posiciones similares, principalmente en sistema financiero supervisado por la SBS. Nivel Avanzado de Excel. Nivel Intermedio de SQL y Power BI.¿Cuáles son los beneficios que disfrutarás? Ingreso directo a planilla con todos los beneficios de ley. Remuneración acorde con el mercado. Capacitaciones y oportunidades de crecimiento. Seguro de Vida Ley. Beneficios corporativos.Horario: lunes a viernes, modalidad presencial.Lugar de trabajo: Surco.",
+   "aptoDiscapacitado": false,
+   "empresa": "Confidencial",
+   "confidencial": true,
+   "logoURL": null,
+   "validada": null,
+   "empresaPro": null,
+   "fechaHoraPublicacion": "10-11-2026 17:54:40",
+   "fechaPublicacion": "10-11-2026",
+   "fechaModificado": "10-11-2026 17:54:40",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 19,
+   "idSubarea": 2647,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Santiago de Surco, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": true,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118503112,
+   "titulo": "Analista de Gestión de Datos y Procesos",
+   "detalle": "Por encargo de la Dirección de Asuntos Estudiantiles nos encontramos en búsqueda de 1 Analista de Gestión de Datos y Procesos que cumpla con el siguiente perfil:Misión del puesto:Gestionar y optimizar la información, plataformas y procesos operativos de la Oficina de Becas, mediante la integración de datos, la implementación de mejoras tecnológicas y la automatización de procesos, a fin de contribuir a una gestión eficiente, articulada y orientada a la toma de decisiones.Funciones: Diseñar y administrar estructuras de bases de datos para el seguimiento de becarios, actividades y procesos de la Oficina de Becas, coordinando la integración, depuración y validación de información proveniente de distintas fuentes institucionales, a fin de asegurar la calidad y disponibilidad de la información para la gestión de la unidad. Diseñar indicadores de gestión, reportes y dashboards mediante herramientas de analítica y visualización de datos, a fin de facilitar el monitoreo de los procesos y la toma de decisiones de la Oficina de Becas. Identificar, proponer e implementar mejoras tecnológicas orientadas a optimizar procesos operativos y administrativos de la Oficina de Becas, vinculados a la gestión de becarios, incluyendo facturación, bonos, registros, validaciones y seguimiento de trámites, con el fin de reducir tareas manuales y tiempos de atención. Gestionar y optimizar el uso de las plataformas institucionales utilizadas por la Oficina de Becas, incluyendo Kissflow, Campus Virtual y otras herramientas digitales, a fin de asegurar su aprovechamiento. Brindar soporte técnico y analítico a las distintas unidades académicas, administrativas y aliados institucionales mediante la elaboración de información, reportes y análisis requeridos, a fin de contribuir al seguimiento y gestión de los programas de becas.6. Realizar otras funciones complementarias o afines que le sean designadas por superior inmediato.Requerimientos: Bachiller en Ingeniería Informática o Ingeniería de Sistemas o Ingeniería Industrial o Ciencia de Datos o afines. Experiencia de 2 años en instituciones de educación superior. Experiencia de 2 años en organizaciones con alto manejo de información y procesos operativos complejos (deseable). Experiencia de 2 años en proyectos de transformación digital, automatización o mejora de procesos institucionales (deseable). Experiencia de 1 año en análisis y gestión de bases de datos. Experiencia de 1 año en elaboración de reportes operativos y analíticos para la toma de decisiones. Manejo avanzado de bases de datos y herramientas de integración de información. Manejo avanzado de Power BI o similares. Manejo intermedio de plataformas de gestión y automatización de procesos. Inglés a nivel intermedio.",
+   "aptoDiscapacitado": false,
+   "idEmpresa": 1722920,
+   "empresa": "PONTIFICIA UNIVERSIDAD CATOLICA DEL PERU (PUCP)",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_1722920_bum_v2a7d6c49.jpg",
+   "validada": true,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "30-10-2026 11:19:54",
+   "fechaPublicacion": "30-10-2026",
+   "fechaModificado": "03-11-2026 08:34:14",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 30,
+   "idSubarea": 2582,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "San Miguel, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": 3.25,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": true,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118508529,
+   "titulo": "Analista de Datos Junior Business Intelligence",
+   "detalle": "&#x1f680; ¡ÚNETE A NUESTRO EQUIPO!TAIR Renting busca un(a) Analista de Datos Junior para su área de Business Intelligence. El área está en expansión en la empresa: es una oportunidad para crecer con ella, con línea de carrera&#x1f50e; ¿Qué harás? Construir y mantener los procesos que llevan cada noche los datos de los sistemas de la empresa a ATLAS, nuestra plataforma de datos en Microsoft Fabric. Trabajar los datos por capas (arquitectura medallón): bronze, donde llegan tal como vienen de cada sistema; silver, donde se limpian, se validan y se ordenan; y gold, donde quedan listos para los indicadores y los tableros de las áreas. Limpiar y validar los datos: detectar duplicados, vacíos y registros que no cuadran, y reportar al sistema de origen lo que hay que corregir allá. Cuidar que la carga diaria llegue completa y sin errores, y resolver o escalar las incidencias. Usar asistentes de inteligencia artificial (Claude) en el día a día para programar, revisar, documentar y analizar datos, con criterio para validar lo que proponen. Operar la infraestructura que sostiene la plataforma en Azure, incluida su máquina virtual. Integrar las nuevas fuentes de datos: la plataforma va a seguir creciendo con nuevos sistemas internos y con datos de proveedores externos. Documentar los procesos que ejecutas, para que otra persona pueda repetirlos.&#x1f3af; ¿Qué buscamos? Formación: egresado(a) o bachiller en Ingeniería Estadística, Económica, Industrial, de Sistemas, Software o carreras afines. Experiencia: de 1 a 3 años en análisis de datos, ingeniería de datos, desarrollo de software o administración de sistemas; las prácticas profesionales cuentan. Conocimientos requeridos: SQL: consultas con filtros, uniones y agregaciones. Python para procesar y limpiar datos. Power Query y nociones de Power BI. Git. Manejo básico de una máquina virtual: acceso remoto, servicios de Windows y revisión de logs. Deseables: Experiencia usando herramientas de inteligencia artificial para programar o analizar datos. Arquitectura medallón (bronze, silver y gold) o modelado de datos. Microsoft Fabric o PySpark. Servicios en la nube (Azure). AS/400 o DB2 y conexiones ODBC.&#x1f4a1;Actitud Proactivo(a): detecta los problemas y propone cómo resolverlos sin esperar que se lo pidan. Liderazgo: toma la iniciativa y se hace cargo de lo suyo. Facilidad de palabra: explica con claridad lo técnico a personas que no lo son. Comprometido(a) con el trabajo y con el proyecto. Aprende por su cuenta, con curiosidad técnica. Íntegro(a) y discreto(a) con la información del negocio.&#x2728; Qué ofrecemos Contrato por 6 meses, con posibilidad de renovación. Línea de carrera en un área que está en crecimiento. Formación en el puesto en Microsoft Fabric, PySpark, Azure e inteligencia artificial aplicada a datos, con las certificaciones de Microsoft como objetivo de desarrollo. Tiempo completo, en la sede central de Lima.&#x1f4cd; Ubicación: Santa Anita&#x1f4c5; Modalidad: presencial&#x1f552; Horario:Lunes a viernes de 7:30 a.m. a 6:00 p.m.&#x1f381; Beneficios: Sueldo acorde al mercado, entrevista y evaluación Ingreso a planilla con todos los beneficios de ley Oportunidad de crecimiento según desempeño&#x1f4e9; Postula ahora y sé parte de nuestro equipoEnvia CV documentado y Certificado Único Laboral (Certijoven)",
+   "aptoDiscapacitado": false,
+   "idEmpresa": 13245738,
+   "empresa": "TRANSPORTES ANGEL IBARCENA S.A.C.",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_13245738_bum_v5e35c32e.jpg",
+   "validada": true,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "04-11-2026 10:51:43",
+   "fechaPublicacion": "04-11-2026",
+   "fechaModificado": "10-11-2026 12:59:26",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 30,
+   "idSubarea": 59,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Santa Anita, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": null,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": false,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": true,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118516229,
+   "titulo": "ANALISTA DE DATOS MAESTROS - TEMPORAL | STAFF LA MOLINA",
+   "detalle": "ANALISTA DE DATOS MAESTROS | STAFF LA MOLINAUbicación: La MolinaReporta a: Coordinador PivoAC Corporativo reconoce la inclusión, la igualdad de oportunidades y la diversidad como un pilar fundamental que brinda un invaluable aporte e impacto positivo a la organización. Buscamos garantizar que todos los colaboradores se sientan respetados y valorados en su individualidad y no excluidos en sus interacciones con otros colaboradores logrando generar las condiciones que nos permitan obtener las mejores ideas, perspectivas, decisiones y contribuciones de cada colaborador.Nos encontramos en la búsqueda del mejor talento para ocupar la posición de Analista de Datos Maestros - Temporal.Requisitos: Estudios universitarios concluidos en las carreras de Ingeniería de Sistemas, Ingenieria Industrial , Administración o carreras afines. Mínimo 02 años de experiencia en administración de datos, sistemas o tecnología de información. Experiencia en análisis de información, gestión de datos maestros, seguimiento de indicadores (KPIs) y participación en proyectos de mejora de procesos. Manejo de SAP S/4HANA y BusinessObjects(BO), con especialización en el módulo MM y conocimientos de SD y PP. (indispensable) Conocimientos de SAP APO o SAP IBP (deseable). Conocimientos de los procesos de planificación de la cadena de suministro Manejo de herramientas de análisis y gestión de datos. Conocimientos de Python (deseable). Disponibilidad para trabajar de manera temporal.Responsabilidades:Misión: Gestionar los Datos Maestros de la operación Logística y Comercial, en cumplimiento con los estándares de calidad de la información y en coordinación con Marketing, Calidad, Finanzas y Legal. Para garantizar una administración eficaz del portafolio de productos, facilitar la toma de decisiones y contribuir a la eficiencia de las operaciones. Gestionar y asegurar el alta de productos terminados y mercaderías de la compañía, en coordinación con Marketing, Comercial, Finanzas, Legal y Datos Centrales , con el fin de garantizar el lanzamiento oportuno, calidad e integridad de la información en los sistemas corporativos. Elaborar y verificar los KPIs de datos maestros en SAP HANNA y SAP APO, a fin de asegurar la correcta medición, análisis y seguimiento de los indicadores e información. Elaborar y Asegurar la habilitación del portafolio en los aplicativos móviles de Arca Continental (AC Móvil y AC Digital), en coordinación con los equipos de Supply Chain y Comercial, garantizando la disponibilidad de producto en el mercado y su correcta visibilidad para el cliente. Coordinar proyectos estratégicos de la compañía que involucren la gestión del portafolio de SKUs, ya sea en aplicativos o en iniciativas multicategoría, con el propósito de contribuir al crecimiento y diversificación del negocio.AC Corporativo es una empresa que ofrece igualdad de oportunidades. Las decisiones de contratación se toman sin distinción de raza o etnia, color, religión, nacionalidad, sexo, orientación sexual, identidad de género, edad, discapacidad, estatus de veterano protegido o alguna otra característica protegida por la ley.",
+   "aptoDiscapacitado": false,
+   "idEmpresa": 13383929,
+   "empresa": "AC CORPORATIVO DEL PERU S.A.C.",
+   "confidencial": false,
+   "logoURL": null,
+   "validada": true,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "10-11-2026 14:08:04",
+   "fechaPublicacion": "10-11-2026",
+   "fechaModificado": "10-11-2026 14:08:04",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 19,
+   "idSubarea": 2647,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "La Molina, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": null,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": true,
+   "salarioObligatorio": true,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118492439,
+   "titulo": "Analista de Datos (Manteniento)",
+   "detalle": "En San Fernando nos encontramos en la búsqueda de un(a) Analista de Mantenimiento, responsable de analizar y optimizar la gestión del mantenimiento mediante el seguimiento de indicadores, el control de costos y recursos, el análisis de fallas y la implementación de mejoras digitales, contribuyendo a la eficiencia y confiabilidad de los equipos y procesos.¿Qué necesitas? Profesional de las carreras de Ingeniería Industrial, Administración o afines. Experiencia mínima de 1 año realizando funciones de análisis de datos. Manejo de Microsoft Office a nivel intermedio. Conocimientos de herramientas de automatización. Capacidad analítica para el procesamiento e interpretación de datos. Conocimiento de herramientas ETL y Business Intelligence (BI). Manejo de SAP PM y SAP MM a nivel intermedio.¿Cuál será el reto? Gestionar mejoras en SAP, la aplicación de mantenimiento y otras herramientas digitales, impulsando la automatización y transformación digital del área. Realizar el seguimiento al plan anual de mantenimiento, los mantenimientos preventivos y las órdenes de trabajo pendientes. Identificar tendencias en las fallas de los equipos y proponer acciones preventivas para mejorar su confiabilidad. Analizar los gastos de mantenimiento, el uso de recursos y las desviaciones presupuestales. Revisar los niveles de inventario, la rotación de repuestos y los materiales obsoletos o sin movimiento. Evaluar el desempeño, los costos y los tiempos de atención de los proveedores de servicios de mantenimiento. Coordinar el plan anual de capacitación del personal de mantenimiento y realizar el seguimiento de las actividades programadas. Analizar la productividad técnica del personal, los tiempos de ejecución de los trabajos y las necesidades de capacitación.¡Ven y únete a LA BUENA FAMILIA!En San Fernando, evaluamos a nuestros candidatos y candidatas en función de sus conocimientos, habilidades y experiencia, asegurando un proceso de selección basado en mérito y equidad. No discriminamos por motivos de raza, religión, orientación sexual, condición física, situación socioeconómica o cualquier otra característica personal.**Al postular a esta vacante, confirma que ha sido informado(a) sobre las condiciones para el tratamiento de tus datos personales, las cuales se detallan a continuación, y autorizas su uso conforme a lo establecido.Política De Privacidad De Datos Para Los PostulantesLos datos personales solicitados son aquellos necesarios para evaluar su interés y perfil profesional para poder ocupar la posición laboral a la cual postula en San Fernando S.A. (en adelante, San Fernando). Los datos solicitados serán los siguientes: Nombres y apellidos, número de DNI, dirección del domicilio, teléfono, dirección de correo electrónico, imagen, fecha de nacimiento, nacionalidad, sexo, profesión, edad, datos académicos, recorrido profesional, última remuneración y cualquier otra información que usted nos haya proporcionado, aptitudes psicotécnicas, seguros, planes de pensiones/jubilación e información del certificado único laboral. En caso no desee proporcionarnos sus datos personales, ello acarreará la imposibilidad de que podamos continuar su evaluación dentro del proceso de selección.Recopilamos sus datos personales con la finalidad de gestionar su proceso de postulación, evaluación y selección a alguna posición vacante en San Fernando.Sus datos personales serán almacenados en el Banco de Datos Personales de “Postulantes” inscrito en el Registro Nacional de Protección de Datos Personales, aprobado por Resolución Directoral N.º 931-2020-JUS/DGTAIPD-DPDP, bajo titularidad de San Fernando.Sus datos personales son transferidos y/o encargamos su tratamiento a Google LLC (TIN: 37000041), ubicado en los Estados Unidos de América, domiciliado en 1600 Amphitheatre Parkway, Mountain View, California, Estados Unidos de América, proveedor de servicio de alojamiento en la nube. Asimismo, sus datos personales podrán ser comunicados por transferencia a las entidades administrativas, autoridades judiciales y/o policiales cuando medie una obligación legal de hacerlo.Conservaremos sus datos personales durante el tiempo estrictamente necesario para cumplir con la finalidad de evaluar su postulación a un puesto laboral, así como los fines estadísticos, conservaremos sus datos para futuras vacantes laborales en el mismo rubro o similares hasta que usted revoque su consentimiento.Como titular de los datos personales, usted tiene derecho a que se le proporcione acceso a sus datos, a rectificarlos, cancelarlos, a oponerse (o negarse) a su tratamiento. Asimismo, tiene derecho a limitar el uso y divulgación de sus datos personales y a revocar el consentimiento que haya otorgado para su tratamiento. Para ejercer alguno de sus derechos, póngase en contacto con nosotros a través del correo electrónico: .",
+   "aptoDiscapacitado": false,
+   "idEmpresa": 10002829,
+   "empresa": "San Fernando - La buena Familia",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_10002829_bum_vb48addde.jpg",
+   "validada": true,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "22-10-2026 12:08:10",
+   "fechaPublicacion": "22-10-2026",
+   "fechaModificado": "02-11-2026 09:37:57",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 22,
+   "idSubarea": 36,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Surquillo, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": 3.84,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": true,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118507869,
+   "titulo": "Analista de Ingeniería de Datos ODI - Oracle",
+   "detalle": "Buscamos un(a) Analista de Ingeniería de Datos ODI para desarrollar y mantener procesos de integración y transformación de datos, asegurando la calidad de la información y el cumplimiento de los estándares técnicos.Principales funciones: Desarrollar y mantener procesos ETL/ELT utilizando Oracle Data Integrator (ODI). Construir mappings, packages, scenarios y procedimientos de carga. Implementar transformaciones mediante SQL y PL/SQL. Integrar información desde bases de datos, archivos planos y otras fuentes estructuradas. Ejecutar pruebas y validaciones de calidad, integridad y consistencia de datos. Realizar conciliaciones entre origen y destino e identificar errores en los procesos. Monitorear cargas, atender incidencias, optimizar consultas SQL y elaborar documentación técnica. Participar en despliegues hacia ambientes de pruebas y producción.Requisitos: Bachiller o titulado en Ingeniería de Sistemas, Informática, Software o carreras afines. Experiencia mínima de 2 años en desarrollo o integración de datos. Al menos 1 año de experiencia práctica con ODI. Conocimientos intermedios de ODI 12c/14c, SQL, PL/SQL, Oracle Database y ETL/ELT. Conocimiento de mappings, packages, scenarios, modelamiento relacional y validación de datos. Conocimientos básicos de Linux y Shell scripting. Git y Python deseables.Modalidad de trabajo: Remoto (1 vez presencial cada uno o dos meses)",
+   "aptoDiscapacitado": true,
+   "idEmpresa": 1067310,
+   "empresa": "Software Enterprise Services",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_1067310_bum_v206f7237.jpg",
+   "validada": true,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "03-11-2026 17:59:22",
+   "fechaPublicacion": "03-11-2026",
+   "fechaModificado": "11-11-2026 14:28:30",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 19,
+   "idSubarea": 2647,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "San Isidro, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": null,
+   "modalidadTrabajo": "Remoto",
+   "tienePreguntas": true,
+   "salarioObligatorio": true,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118496346,
+   "titulo": "Analista Junior de Datos BI",
+   "detalle": "¡En Grupo Lucky estamos buscando a nuestro próximo Analista Junior de Datos BI! &#x1f680;&#x1f525;En Grupo Lucky buscamos un(a) Analista Junior de Datos BI para fortalecer nuestro equipo y contribuir en la transformación de datos en información estratégica que permita una mejor toma de decisiones, optimización de procesos y generación de valor para el negocio.&#x1f3af;¿Qué retos tendrás? Elaborar, actualizar y automatizar reportes e indicadores de gestión. Analizar, depurar, transformar y validar bases de datos provenientes de diferentes fuentes. Desarrollar dashboards e informes en Power BI para el seguimiento de KPIs. Ejecutar procesos de extracción, consolidación y cruce de información utilizando Excel, Power Query y SQL. Asegurar la calidad, consistencia e integridad de los datos utilizados por las áreas usuarias. Identificar oportunidades de automatización y mejora continua en los procesos de análisis de información. Brindar soporte en la generación de reportes relacionados con presupuestos, costos y gestión financiera. Participar en proyectos de inteligencia de negocios y analítica de datos.¿Qué buscamos? Egresado(a) o bachiller de Ingeniería Industrial, Ingeniería de Sistemas, Estadística, Economía, Administración o carreras afines. Experiencia de 6 meses a 2 años en análisis de datos, Business Intelligence, reporting o funciones similares. Manejo de Excel Intermedio - Avanzado. Manejo de Power BI a nivel Intermedio. Conocimiento de Power Query. Conocimiento de DAX a nivel básico o intermedio. Conocimiento de SQL a nivel básico o intermedio. Experiencia realizando limpieza, transformación, validación y análisis de bases de datos. Capacidad analítica, orientación al detalle y enfoque en la resolución de problemas. Conocimiento y uso de herramientas de Inteligencia Artificial Generativa. Interés por la automatización y mejora continua de procesos.Deseable: Conocimiento de Python. Conocimiento de Power Automate. Experiencia trabajando con ERP. Conocimientos de procesos financieros, presupuestos, facturación o distribución de gastos.¡Lo que tenemos para ti! Dale más a tu vida&#x1f91d; Un equipo que te respalda desde el día uno. Oportunidades reales de crecimiento y capacitación constante. Beneficios corporativos y eventos internos para celebrar nuestros logros. Planilla desde el primer día y beneficios de ley. Horarios y días de descanso estables. Programas de reconocimiento y premios al desempeño.Si te encanta superar retos y buscas un lugar donde tu energía realmente cuente, ¡llegaste al lugar correcto!&#x1f449; ¿Te sumas al equipo? ¡Completa tu postulación!",
+   "aptoDiscapacitado": false,
+   "idEmpresa": 10124875,
+   "empresa": "Grupo Lucky",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_10124875_bum_v69c1c6b4.jpg",
+   "validada": true,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "26-10-2026 11:08:17",
+   "fechaPublicacion": "26-10-2026",
+   "fechaModificado": "03-11-2026 13:06:20",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 19,
+   "idSubarea": 2647,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Miraflores, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": null,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": true,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118487127,
+   "titulo": "CIBERTEC - Analista de Datos",
+   "detalle": "¡Únete a Cibertec! En Cibertec contribuimos a la transformación del Perú a través de una educación inclusiva, accesible y de calidad que transforma vidas.Nos encontramos en la búsqueda de un ANALISTA DE DATOS que desee aportar al desarrollo de capacidades y generar un impacto positivo en nuestra comunidad educativa.Misión del puesto:Responsable de recopilar, limpiar, transformar y visualizar datos utilizando herramientas de análisis de datos, para brindar información clave para la toma de decisiones en diversas áreas del negocio.Requisitos:Bachiller universitario o Técnico en ingenierías, administración, economía o ingeniería empresarial.Manejo de office a nivel avanzado.Conocimiento de Power BI, SQL, PYTHON.Experiencia mínima de 02 años en el área de BI o afines de preferencia de instituciones del sector educación, banca o seguros, cumpliendo funciones propias del puesto.Experiencia en el uso de herramienta de análisis de datos.Funciones:Diseñar informes interactivos y dashboards que incluyan gráficos, tablas y elementos visuales.Identificar diferencias en la distribución de datos que podrían afectar el rendimiento del modelo.Automatizar reportes periódicos y generar insights accionables para distintos equipos (SAE, Back Office).Monitorear tendencias y detectar oportunidades o alertas en el comportamiento de la data.Participar en las mejoras de procesos y arquitectura de automatización de modelos.Propone iniciativas de mejora y eficiencias, implementándolas en coordinación con las áreas Corporativas.Elaborar y realizar el análisis de reportes a solicitud.Beneficios:Ingreso a planilla desde el primer día de labores.Horario de trabajo: lunes a viernes de 8.30 am a 6.30 pmTrabajo híbridoBeneficios educativos en la Red Laureate Perú de acuerdo con la permanencia en la institución (para colaborador e hijos)EPS 50% + Seguro Oncológico (previa afiliación)Como institución, en Cibertec valoramos la diversidad y promovemos entornos inclusivos donde todas las personas tengan las mismas oportunidades de participación y desarrollo, sin distinción de origen, género, edad, discapacidad u otras condiciones.#LoQueNosUneNosHaceUno #OportunidadesLaborales",
+   "aptoDiscapacitado": false,
+   "idEmpresa": 2242930,
+   "empresa": "Laureate Perú",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_2242930_bum_vbaf21635.jpg",
+   "validada": true,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "19-10-2026 15:17:49",
+   "fechaPublicacion": "19-10-2026",
+   "fechaModificado": "09-11-2026 22:34:15",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 19,
+   "idSubarea": 2647,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Cercado De Lima, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": 3.12,
+   "modalidadTrabajo": "Híbrido",
+   "tienePreguntas": true,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118495397,
+   "titulo": "Analista de datos para Importaciones y Exportaciones",
+   "detalle": "El desafíoGestionar y dar seguimiento a las operaciones de importación y exportación, desde la confirmación del pedido hasta su entrega en el destino acordado, utilizando datos para anticipar desviaciones, optimizar costos y facilitar la toma de decisiones.¿En qué trabajarás?Información para tomar mejores decisiones  Consolidar y analizar datos de pedidos, embarques, entregas y costos, verificando su calidad y consistencia.   Desarrollar tableros e informes que permitan visualizar el estado de las operaciones, los tiempos de atención y el desempeño de proveedores y operadores.   Identificar tendencias, retrasos recurrentes y sobrecostos, proponiendo acciones sustentadas en información.   Comparar rutas, modalidades de transporte y alternativas de abastecimiento según su costo, plazo y urgencia. Automatización e inteligencia artificial aplicada  Automatizar la actualización de reportes, la consolidación de bases y otras tareas repetitivas del seguimiento operativo.   Utilizar herramientas de IA para apoyar el análisis de información, la revisión documental y la elaboración de reportes, validando los resultados.   Participar en el desarrollo de alertas tempranas para detectar posibles retrasos y desviaciones de costos.   Evaluar oportunidades de uso de analítica predictiva junto con los equipos especializados, según la disponibilidad y calidad de los datos. Seguimiento de operaciones internacionales  Coordinar con proveedores del exterior la atención de pedidos y el cumplimiento de las fechas comprometidas.   Dar seguimiento a embarques con agentes de carga, operadores logísticos y transportistas, comunicando incidencias y alternativas de solución.   Proponer opciones de atención para pedidos urgentes que requieran un flujo de abastecimiento diferente al habitual.   Evaluar la viabilidad operativa y económica de operaciones con nuevos proveedores u orígenes. Control y mejora continua  Planificar y registrar los costos de las operaciones en el sistema de gestión, contrastando lo previsto con lo ejecutado.   Verificar el registro de comprobantes y realizar seguimiento a los pagos de proveedores de bienes y servicios.   Presentar indicadores y propuestas de mejora a las áreas involucradas.   Mantener actualizada la documentación y trazabilidad de las operaciones.   Cumplir los procedimientos internos, los lineamientos de seguridad y salud en el trabajo y las demás actividades afines al cargo.  Requisitos: El perfil que buscamos  Formación universitaria completa en Negocios Internacionales, Comercio Exterior, Administración o carreras afines.   Más de 4 años de experiencia en seguimiento de importaciones y exportaciones, coordinación con operadores y control de costos.   Manejo de Excel avanzado y herramientas de análisis y visualización de datos, como Power BI o equivalentes.   Experiencia en preparación, depuración y consolidación de bases de datos.   Conocimiento práctico de herramientas de IA aplicadas al análisis o la productividad.   Inglés intermedio o avanzado.  Beneficios Beneficios corporativos y de ley",
+   "aptoDiscapacitado": true,
+   "empresa": "Confidencial",
+   "confidencial": true,
+   "logoURL": null,
+   "validada": null,
+   "empresaPro": null,
+   "fechaHoraPublicacion": "24-10-2026 10:11:34",
+   "fechaPublicacion": "24-10-2026",
+   "fechaModificado": "08-11-2026 21:31:46",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 2,
+   "idSubarea": 100,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Lima, Lima",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "modalidadTrabajo": "Híbrido",
+   "tienePreguntas": false,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": true,
+   "tipoAviso": "simple"
+  },
+  {
+   "id": 1118517064,
+   "titulo": "ANALISTA DE CALIDAD DE DATOS-CUSCO / CE-1932-2026",
+   "detalle": "Funciones Ejecutar pruebas y diagnósticos de calidad de datos en las diferentes fuentes y sistemas de la entidad financiera.  Identificar, analizar y documentar las inconsistencias, errores, duplicidades y otras anomalías presentes en los datos.  Aplicar técnicas de perfilamiento de datos para comprender la estructura, contenido y calidad de los conjuntos de datos.  Validar el cumplimiento de los datos con las reglas de negocio, los estándares definidos y las políticas de calidad.  Realizar los diagnósticos de datos, determinar los hallazgos, incluyendo el impacto potencial de los problemas identificados y elaborar informes detallados.  Participar en la definición y seguimiento de las acciones de reparación de datos para corregir sus errores.  Colaborar con los dueños de los datos y demás áreas interesadas en la investigación y resolución de problemas de calidad.  Contribuir en la creación y actualización de la documentación de los procesos y controles de calidad de datos.  Participar en la implementación de herramientas y metodologías para la mejora continua de la calidad de los datos.  Apoyar en la ejecución de auditorías de calidad de datos, proporcionando la información y documentación requerida.  Participar en el diseño y desarrollo de arquitecturas de datos sólidos para respaldar las necesidades de procesamiento de calidad de la organización  Administrar y mantener la calidad y limpieza en la base de datos garantizando su rendimiento, integridad y seguridad óptimos de los datos.  Trabajar en estrecha relación con colaboradores especializados que trabajen con datos como son científicos de datos, analistas de datos, u otros roles que utilicen datos para comprender los requisitos de calidad datos y proporcionar soluciones.  Coordinar con la Gerencia de Tecnología de la Información la implementación de las mejoras correctivas que deben aplicarse en los entornos de captura de datos. Competencias Experiencia de Cliente Responsabilidad Espíritu Colaborativo Mejora Continua Innovación ExcelenciaRequisitos MínimosFormación: Bachiller o Título Profesional Universitario (inscrito en SUNEDU) de Administración, Economía, Contabilidad, Ingeniería Económica, Ingeniería industrial u otras carreras afines al cargo que postula. Experiencia: Un (1) año en el mismo cargo o dos (2) años en cargos de asistente u otros puestos equivalentes en el desempeño de funciones relacionados al cargo que postula.Conocimientos complementarios deseables: Curso de Especialización relacionado al cargo como pueden ser: Curso de gobierno de datos, inteligencia de negocios, analítica de datos, big data, ciencia de datos, transformación digital, gestión de proyectos u otros.  Ingles Básico  De preferencia: SQL Server, Suit BI SQL, Microsoft Office nivel avanzado.  Power BI nivel intermedio. Fecha límite de postulación: Miércoles, 18 de noviembre 2026.",
+   "aptoDiscapacitado": true,
+   "idEmpresa": 13031525,
+   "empresa": "CAJA CUSCO",
+   "confidencial": false,
+   "logoURL": "https://imgbum.jobscdn.com/portal/img/empresas/11/static/logoMainPic_13031525_bum_v6e8b76d0.jpg",
+   "validada": true,
+   "empresaPro": false,
+   "fechaHoraPublicacion": "11-11-2026 08:36:39",
+   "fechaPublicacion": "11-11-2026",
+   "fechaModificado": "11-11-2026 08:36:39",
+   "planPublicacion": {
+    "id": 80,
+    "nombre": "Simples_60"
+   },
+   "portal": "bumeran",
+   "tipoTrabajo": "Full-time",
+   "idPais": 11,
+   "idArea": 1,
+   "idSubarea": 2598,
+   "leido": null,
+   "visitadoPorPostulante": null,
+   "localizacion": "Cusco, Cuzco",
+   "cantidadVacantes": 1,
+   "guardado": null,
+   "gptwUrl": null,
+   "promedioEmpresa": 3.89,
+   "modalidadTrabajo": "Presencial",
+   "tienePreguntas": true,
+   "salarioObligatorio": false,
+   "altaRevisionPerfiles": false,
+   "postulacionRapida": false,
+   "tipoAviso": "simple"
+  }
+ ],
+ "filters": [
+  {
+   "type": "provincia",
+   "facets": [
+    {
+     "id": "27334",
+     "idSemantico": "peru|lima",
+     "name": "Lima",
+     "quantity": 74
+    },
+    {
+     "id": "298307",
+     "idSemantico": "peru|arequipa",
+     "name": "Arequipa",
+     "quantity": 5
+    },
+    {
+     "id": "1295448",
+     "idSemantico": "peru|ica",
+     "name": "Ica",
+     "quantity": 2
+    },
+    {
+     "id": "149828",
+     "idSemantico": "peru|apurimac",
+     "name": "Apurimac",
+     "quantity": 1
+    },
+    {
+     "id": "1295451",
+     "idSemantico": "peru|cuzco",
+     "name": "Cuzco",
+     "quantity": 1
+    },
+    {
+     "id": "1295452",
+     "idSemantico": "peru|gobierno-regional-del-callao",
+     "name": "Gobierno Regional del Callao",
+     "quantity": 1
+    }
+   ]
+  },
+  {
+   "type": "area",
+   "facets": [
+    {
+     "id": "19",
+     "idSemantico": "tecnologia-sistemas-y-telecomunicaciones",
+     "name": "Tecnología, Sistemas y Telecomunicaciones",
+     "quantity": 52
+    },
+    {
+     "id": "1",
+     "idSemantico": "administracion-contabilidad-y-finanzas",
+     "name": "Administración, Contabilidad y Finanzas",
+     "quantity": 7
+    },
+    {
+     "id": "22",
+     "idSemantico": "oficios-y-otros",
+     "name": "Oficios y Otros",
+     "quantity": 7
+    },
+    {
+     "id": "6",
+     "idSemantico": "comercial-ventas-y-negocios",
+     "name": "Comercial, Ventas y Negocios",
+     "quantity": 5
+    },
+    {
+     "id": "30",
+     "idSemantico": "ingenierias",
+     "name": "Ingenierías",
+     "quantity": 4
+    },
+    {
+     "id": "3",
+     "idSemantico": "abastecimiento-y-logistica",
+     "name": "Abastecimiento y Logística",
+     "quantity": 2
+    },
+    {
+     "id": "4",
+     "idSemantico": "ingenieria-civil-y-construccion",
+     "name": "Ingeniería Civil y Construcción",
+     "quantity": 2
+    },
+    {
+     "id": "2",
+     "idSemantico": "aduana-y-comercio-exterior",
+     "name": "Aduana y Comercio Exterior",
+     "quantity": 1
+    },
+    {
+     "id": "9",
+     "idSemantico": "educacion-docencia-e-investigacion",
+     "name": "Educación, Docencia e Investigación",
+     "quantity": 1
+    },
+    {
+     "id": "16",
+     "idSemantico": "produccion-y-manufactura",
+     "name": "Producción y Manufactura",
+     "quantity": 1
+    },
+    {
+     "id": "17",
+     "idSemantico": "recursos-humanos-y-capacitacion",
+     "name": "Recursos Humanos y Capacitación",
+     "quantity": 1
+    },
+    {
+     "id": "25",
+     "idSemantico": "atencion-al-cliente-call-center-y-telemarketing",
+     "name": "Atención al Cliente, Call Center y Telemarketing",
+     "quantity": 1
+    }
+   ]
+  },
+  {
+   "type": "apto_discapacitado",
+   "facets": [
+    {
+     "id": "true",
+     "idSemantico": "discapacitados-apto",
+     "name": "Postulantes con discapacidad",
+     "quantity": 18
+    }
+   ]
+  },
+  {
+   "type": "segmentacion_collar",
+   "facets": [
+    {
+     "id": "1",
+     "idSemantico": "white",
+     "name": "White Collar",
+     "quantity": 84
+    }
+   ]
+  },
+  {
+   "type": "tipo_trabajo",
+   "facets": [
+    {
+     "id": "2",
+     "idSemantico": "full-time",
+     "name": "Full-time",
+     "quantity": 83
+    },
+    {
+     "id": "1",
+     "idSemantico": "part-time",
+     "name": "Part-time",
+     "quantity": 1
+    }
+   ]
+  },
+  {
+   "type": "tipo_contratacion",
+   "facets": [
+    {
+     "id": "1",
+     "idSemantico": "indeterminado",
+     "name": "Indeterminado",
+     "quantity": 60
+    },
+    {
+     "id": "2",
+     "idSemantico": "temporal",
+     "name": "Temporal",
+     "quantity": 17
+    },
+    {
+     "id": "3",
+     "idSemantico": "voluntario",
+     "name": "Voluntario",
+     "quantity": 1
+    },
+    {
+     "id": "5",
+     "idSemantico": "autonomo",
+     "name": "Autónomo",
+     "quantity": 1
+    }
+   ]
+  },
+  {
+   "type": "nivel_laboral",
+   "facets": [
+    {
+     "id": "8",
+     "idSemantico": "semi-sr",
+     "name": "Semi Sr",
+     "quantity": 35
+    },
+    {
+     "id": "2",
+     "idSemantico": "junior",
+     "name": "Junior",
+     "quantity": 27
+    },
+    {
+     "id": "7",
+     "idSemantico": "senior",
+     "name": "Senior",
+     "quantity": 9
+    },
+    {
+     "id": "1",
+     "idSemantico": "senior-semi-senior",
+     "name": "Senior / Semi-Senior",
+     "quantity": 2
+    }
+   ]
+  },
+  {
+   "type": "postulacion_rapida",
+   "facets": [
+    {
+     "id": "true",
+     "idSemantico": "postulacion-rapida",
+     "name": "Postulación rápida",
+     "quantity": 6
+    }
+   ]
+  },
+  {
+   "type": "modalidad_trabajo",
+   "facets": [
+    {
+     "id": "1",
+     "idSemantico": "presencial",
+     "name": "Presencial",
+     "quantity": 55
+    },
+    {
+     "id": "3",
+     "idSemantico": "hibrido",
+     "name": "Híbrido",
+     "quantity": 27
+    },
+    {
+     "id": "2",
+     "idSemantico": "remoto",
+     "name": "Remoto",
+     "quantity": 2
+    }
+   ]
+  },
+  {
+   "type": "dias_fecha_publicacion",
+   "facets": [
+    {
+     "id": "now-1d/d",
+     "idSemantico": "publicacion-menor-a-2-dias",
+     "name": "Menor a 2 días",
+     "quantity": 3
+    },
+    {
+     "id": "now-3d/d",
+     "idSemantico": "publicacion-menor-a-3-dias",
+     "name": "Menor a 3 días",
+     "quantity": 8
+    },
+    {
+     "id": "now-4d/d",
+     "idSemantico": "publicacion-menor-a-4-dias",
+     "name": "Menor a 4 días",
+     "quantity": 8
+    },
+    {
+     "id": "now-5d/d",
+     "idSemantico": "publicacion-menor-a-5-dias",
+     "name": "Menor a 5 días",
+     "quantity": 8
+    },
+    {
+     "id": "now-6d/d",
+     "idSemantico": "publicacion-menor-a-6-dias",
+     "name": "Menor a 6 días",
+     "quantity": 11
+    },
+    {
+     "id": "now-7d/d",
+     "idSemantico": "publicacion-menor-a-7-dias",
+     "name": "Menor a 1 semana",
+     "quantity": 13
+    },
+    {
+     "id": "now-15d/d",
+     "idSemantico": "publicacion-menor-a-15-dias",
+     "name": "Menor a 15 días",
+     "quantity": 21
+    },
+    {
+     "id": "now-31d/d",
+     "idSemantico": "publicacion-menor-a-1-mes",
+     "name": "Menor a 1 mes",
+     "quantity": 37
+    }
+   ]
+  }
+ ],
+ "filtersApplied": [
+  {
+   "id": "query",
+   "value": "analista de datos"
+  }
+ ],
+ "totalSearched": 84,
+ "homeList": null
+}

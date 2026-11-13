@@ -1,0 +1,16 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: jobradar
+    runtime: docker
+    plan: free
+    region: virginia        # closest Render region to Peru
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: ENV
+        value: production
+      - key: SECRET_KEY      # signs sessions + encrypts the API-key cookie
+        generateValue: true
+      - key: APP_PASSWORD    # you choose it in the Render dashboard (>= 12 chars)
+        sync: false

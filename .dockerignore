@@ -1,0 +1,11 @@
+.venv/
+data/
+tests/
+**/__pycache__/
+*.pyc
+.env
+.env.*
+.git/
+*.md
+run.bat
+requirements-dev.txt

@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JobRadar</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script defer src="/static/app.js"></script>
+  <script defer src="/static/vendor/alpine.min.js"></script>
+</head>
+<body>
+<div x-data="jobradar()" x-init="init()" class="app" x-cloak>
+
+  <header class="topbar">
+    <div class="brand"><span class="logo">◎</span> JobRadar <small>Perú</small></div>
+    <nav class="tabs">
+      <button :class="{active: tab==='buscar'}" @click="tab='buscar'">Buscar</button>
+      <button :class="{active: tab==='resultados'}" @click="tab='resultados'">Resultados <span class="pill" x-show="results.length" x-text="results.length"></span></button>
+      <button :class="{active: tab==='mis'}" @click="tab='mis'; loadTracked()">Mis ofertas</button>
+      <button :class="{active: tab==='config'}" @click="tab='config'">Configuración</button>
+      {% if auth_required %}<button @click="logout()" title="Cerrar sesión">Salir</button>{% endif %}
+    </nav>
+  </header>
+
+  <div class="toast" x-show="toast" x-transition x-text="toast"></div>
+
+  <!-- ================= BUSCAR ================= -->
+  <main x-show="tab==='buscar'" class="page">
+    <div class="profiles card">
+      <label>Perfil guardado</label>
+      <select x-model="profileId" @change="loadProfile()">
+        <option value="">— Nueva búsqueda —</option>
+        <template x-for="pr in profiles" :key="pr.id"><option :value="pr.id" x-text="pr.name"></option></template>
+      </select>
+      <input type="text" placeholder="Nombre del perfil (ej. Analista remoto)" x-model="profileName">
+      <button class="btn ghost" @click="saveProfile()">Guardar perfil</button>
+      <button class="btn ghost danger" x-show="profileId" @click="deleteProfile()">Eliminar</button>
+    </div>
+
+    <form @submit.prevent="startSearch()" class="form-grid">
+      <section class="card">
+        <h2><span class="step">A</span> Qué buscar</h2>
+        <label>Cargos o palabras clave <em>separados por coma (máx. 5); cada uno se busca por separado</em></label>
+        <textarea rows="2" x-model="form.keywordsText" placeholder="Analista de datos, Data Analyst, Analista BI" required></textarea>
+        <div class="row">
+          <div><label>Ciudad / región</label><input type="text" x-model="form.location" placeholder="Lima"></div>
+          <div><label>Antigüedad máxima</label>
+            <select x-model.number="form.hours_old">
+              <option :value="24">Últimas 24 horas</option><option :value="72">Últimos 3 días</option>
+              <option :value="168">Última semana</option><option :value="336">Últimas 2 semanas</option>
+              <option :value="720">Último mes</option><option :value="0">Sin límite</option>
+            </select></div>
+        </div>
+        <label>Modalidad <em>vacío = cualquiera</em></label>
+        <div class="chips">
+          <template x-for="m in meta.modalities"><button type="button" class="chip" :class="{on: form.modalities.includes(m)}" @click="toggle(form.modalities, m)" x-text="labels.mod[m]"></button></template>
+        </div>
+        <label>Tipo de jornada</label>
+        <div class="chips">
+          <template x-for="t in meta.job_types"><button type="button" class="chip" :class="{on: form.job_types.includes(t)}" @click="toggle(form.job_types, t)" x-text="labels.type[t]"></button></template>
+        </div>
+        <label>Portales</label>
+        <div class="sources">
+          <template x-for="s in meta.sources" :key="s.key">
+            <label class="source" :class="{disabled: s.unavailable}" :title="s.unavailable || ''">
+              <input type="checkbox" :disabled="!!s.unavailable" :checked="form.sources.includes(s.key)" @change="toggle(form.sources, s.key)">
+              <span x-text="s.label"></span>
+              <small x-show="s.experimental" class="tag warn">experimental</small>
+              <small x-show="s.unavailable" class="tag muted">no disponible</small>
+            </label>
+          </template>
+        </div>
+        <div class="row">
+          <div><label>Máx. ofertas por portal y cargo</label><input type="number" min="5" :max="meta.limits.max_per_source || 100" x-model.number="form.max_per_source"></div>
+          <div class="check-inline"><label><input type="checkbox" x-model="form.fetch_descriptions"> <span>Descargar descripciones completas <em>más preciso, más lento</em></span></label></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2><span class="step">B</span> Perfil y condiciones</h2>
+        <label>Nivel <em>vacío = cualquiera</em></label>
+        <div class="chips">
+          <template x-for="l in meta.levels"><button type="button" class="chip" :class="{on: form.levels.includes(l)}" @click="toggle(form.levels, l)" x-text="labels.level[l]"></button></template>
+        </div>
+        <div class="row">
+          <div><label>Salario mínimo mensual</label><input type="number" min="0" step="100" x-model.number="form.salary_min" placeholder="ej. 3000"></div>
+          <div><label>Moneda</label><select x-model="form.currency"><option>PEN</option><option>USD</option></select></div>
+        </div>
+        <label class="inline"><input type="checkbox" x-model="form.include_no_salary"> Incluir ofertas sin salario publicado</label>
+        <label>Tus años de experiencia <em>descarta ofertas que piden más</em></label>
+        <input type="number" min="0" max="40" x-model="form.years_experience" placeholder="ej. 2">
+
+        <h2 class="mt"><span class="step">C</span> Filtros finos</h2>
+        <label>Palabras obligatorias <em>deben aparecer todas</em></label>
+        <input type="text" x-model="form.must_haveText" placeholder="SQL">
+        <label>Palabras deseables <em>suben el puntaje</em></label>
+        <input type="text" x-model="form.nice_to_haveText" placeholder="Power BI, Python, inglés">
+        <label>Palabras excluyentes <em>en título o descripción</em></label>
+        <input type="text" x-model="form.excludeText" placeholder="ventas, call center, comisiones">
+        <label>Excluir si el título contiene</label>
+        <input type="text" x-model="form.exclude_titleText" placeholder="Senior, Gerente">
+        <label>Empresas bloqueadas</label>
+        <input type="text" x-model="form.blocked_companiesText" placeholder="Empresa X, Consultora Y">
+        <label>Idioma de la oferta</label>
+        <div class="chips">
+          <button type="button" class="chip" :class="{on: form.languages.includes('es')}" @click="toggle(form.languages,'es')">Español</button>
+          <button type="button" class="chip" :class="{on: form.languages.includes('en')}" @click="toggle(form.languages,'en')">Inglés</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2><span class="step">D</span> Puntaje y extras</h2>
+        <label>Puntaje mínimo: <strong x-text="form.min_score"></strong></label>
+        <input type="range" min="0" max="90" step="5" x-model.number="form.min_score">
+        <label class="inline"><input type="checkbox" x-model="form.only_new"> Mostrar solo ofertas nuevas (no vistas antes)</label>
+        <label class="inline"><input type="checkbox" x-model="form.ai_match" :disabled="!canUseAI()">
+          Analizar afinidad con mi CV usando IA</label>
+        <p class="hint" x-show="!canUseAI()">Para usar IA, sube tu CV y tu API key en <a href="#" @click.prevent="tab='config'">Configuración</a>.</p>
+        <button class="btn primary big" type="submit" :disabled="searching">
+          <span x-show="!searching">Buscar ofertas</span><span x-show="searching">Buscando…</span>
+        </button>
+
+        <div class="progress" x-show="status">
+          <div class="phase">Estado: <strong x-text="labels.phase[status?.phase] || status?.phase"></strong></div>
+          <template x-for="(st, key) in (status?.sources || {})" :key="key">
+            <div class="prow" :class="st.status">
+              <span class="dot"></span><span class="pname" x-text="sourceLabel(key)"></span>
+              <span class="pcount" x-text="st.count"></span>
+              <span class="pmsg" x-text="st.message"></span>
+            </div>
+          </template>
+          <div class="prow" :class="aiRunning ? 'buscando' : 'ok'" x-show="aiProgress">
+            <span class="dot"></span><span class="pname">IA</span>
+            <span class="pcount" x-text="(aiProgress?.done||0) + '/' + (aiProgress?.total||0)"></span>
+            <span class="pmsg" x-text="aiProgress?.lastError || ''"></span>
+          </div>
+          <p class="error" x-show="status?.error" x-text="status?.error"></p>
+        </div>
+
+        <div class="history" x-show="runs.length">
+          <h3>Búsquedas recientes</h3>
+          <template x-for="r in runs" :key="r.id">
+            <div class="hrow">
+              <a href="#" @click.prevent="openRun(r.id)" x-text="r.started"></a>
+              <span class="kw" x-text="r.keywords.join(', ')"></span>
+              <span class="pill" x-text="r.kept"></span>
+              <button class="link-btn" @click="deleteRun(r.id)" title="Eliminar" aria-label="Eliminar búsqueda">✕</button>
+            </div>
+          </template>
+          <p class="hint">Se guardan las últimas 5 búsquedas en este navegador.</p>
+        </div>
+      </section>
+    </form>
+  </main>
+
+  <!-- ================= RESULTADOS ================= -->
+  <main x-show="tab==='resultados'" class="page results-page">
+    <template x-if="!results.length">
+      <div class="empty card">
+        <p x-show="!runId">Aún no hay resultados. Haz una búsqueda en la pestaña <a href="#" @click.prevent="tab='buscar'">Buscar</a>.</p>
+        <p x-show="runId">Esta búsqueda no tiene ofertas que pasen tus filtros. Revisa el resumen y ajusta los filtros.</p>
+        <div x-show="summary?.rejected && Object.keys(summary.rejected).length" class="rejected">
+          <h3>Ofertas descartadas por filtros</h3>
+          <template x-for="(n, why) in summary?.rejected || {}"><div><span x-text="why"></span>: <strong x-text="n"></strong></div></template>
+        </div>
+      </div>
+    </template>
+
+    <template x-if="results.length">
+    <div class="results-layout">
+      <aside class="filters card">
+        <div class="summary">
+          <div><strong x-text="filtered.length"></strong> de <span x-text="results.length"></span> ofertas</div>
+          <small x-show="summary">Descargadas <span x-text="summary?.fetched"></span> · duplicadas <span x-text="summary?.duplicates"></span> · nuevas <span x-text="summary?.new"></span></small>
+        </div>
+        <label>Buscar en resultados</label>
+        <input type="search" x-model="qf.text" placeholder="texto, empresa…">
+        <label>Puntaje mínimo: <strong x-text="qf.minScore"></strong></label>
+        <input type="range" min="0" max="100" step="5" x-model.number="qf.minScore">
+        <label>Ordenar por</label>
+        <select x-model="qf.sort"><option value="score">Puntaje</option><option value="ai">Afinidad IA</option><option value="date">Más recientes</option><option value="salary">Salario</option></select>
+        <label>Portal</label>
+        <div class="chips small">
+          <template x-for="s in resultSources"><button type="button" class="chip" :class="{on: qf.sources.includes(s)}" @click="toggle(qf.sources, s)" x-text="sourceLabel(s)"></button></template>
+        </div>
+        <label>Modalidad</label>
+        <div class="chips small">
+          <template x-for="m in meta.modalities"><button type="button" class="chip" :class="{on: qf.modalities.includes(m)}" @click="toggle(qf.modalities, m)" x-text="labels.mod[m]"></button></template>
+        </div>
+        <label>Estado</label>
+        <div class="chips small">
+          <template x-for="st in meta.statuses"><button type="button" class="chip" :class="{on: qf.statuses.includes(st)}" @click="toggle(qf.statuses, st)" x-text="labels.status[st]"></button></template>
+        </div>
+        <label class="inline"><input type="checkbox" x-model="qf.onlyNew"> Solo nuevas</label>
+        <label class="inline"><input type="checkbox" x-model="qf.withSalary"> Solo con salario</label>
+        <label class="inline"><input type="checkbox" x-model="qf.hideDiscarded"> Ocultar descartadas</label>
+        <div class="actions">
+          <button class="btn ghost" @click="exportRows('xlsx')">Exportar Excel</button>
+          <button class="btn ghost" @click="exportRows('csv')">CSV</button>
+          <button class="btn ghost" @click="runAI()" :disabled="aiRunning" x-text="aiRunning ? 'Analizando con IA…' : 'Analizar top con IA'"></button>
+        </div>
+        <details x-show="summary?.rejected && Object.keys(summary.rejected).length" class="rejected">
+          <summary>Descartadas por filtros</summary>
+          <template x-for="(n, why) in summary?.rejected || {}"><div><span x-text="why"></span>: <strong x-text="n"></strong></div></template>
+        </details>
+      </aside>
+
+      <section class="list">
+        <template x-for="j in filtered" :key="j.id">
+          <article class="job card" :class="{selected: sel && sel.id===j.id, discarded: j.status==='descartada'}" @click="select(j)">
+            <div class="score" :class="scoreClass(j.score)" x-text="j.score"></div>
+            <div class="jmain">
+              <div class="jtitle"><span x-text="j.title"></span> <span class="tag new" x-show="j.is_new">nueva</span></div>
+              <div class="jmeta">
+                <span x-text="j.company || '—'"></span> · <span x-text="j.location || '—'"></span>
+              </div>
+              <div class="jtags">
+                <span class="tag src" x-text="sourceLabel(j.source)"></span>
+                <template x-for="o in j.also_on"><span class="tag src alt" x-text="'+ ' + sourceLabel(o)"></span></template>
+                <span class="tag" x-show="j.modality" x-text="labels.mod[j.modality]"></span>
+                <span class="tag" x-show="j.level" x-text="labels.level[j.level]"></span>
+                <span class="tag money" x-show="salaryText(j)" x-text="salaryText(j)"></span>
+                <span class="tag" x-show="j.date_posted" x-text="ago(j.date_posted)"></span>
+                <span class="tag ai" x-show="j.ai_score != null" x-text="'IA ' + j.ai_score"></span>
+                <span class="tag status" x-show="j.status!=='nueva'" :class="j.status" x-text="labels.status[j.status]"></span>
+              </div>
+            </div>
+          </article>
+        </template>
+      </section>
+
+      <section class="detail card" x-show="sel">
+        <template x-if="sel">
+          <div>
+            <button class="close" @click="sel=null" aria-label="Cerrar">✕</button>
+            <h2 x-text="sel.title"></h2>
+            <div class="jmeta"><strong x-text="sel.company || '—'"></strong> · <span x-text="sel.location || '—'"></span> · <span x-text="sourceLabel(sel.source)"></span></div>
+            <div class="status-bar">
+              <template x-for="st in meta.statuses"><button class="chip" :class="{on: sel.status===st}" @click="setStatus(sel, st)" x-text="labels.status[st]"></button></template>
+            </div>
+            <a class="btn primary" :href="safeUrl(sel.url)" target="_blank" rel="noopener noreferrer">Ver oferta y postular ↗</a>
+            <div class="why">
+              <h3>Puntaje <span x-text="sel.score"></span>/100</h3>
+              <ul><template x-for="r in sel.reasons"><li x-text="r"></li></template></ul>
+            </div>
+            <div class="ai-box" x-show="sel.ai">
+              <h3>Afinidad con tu CV: <span x-text="sel.ai?.score"></span>/100</h3>
+              <div class="cols">
+                <div><h4>Fortalezas</h4><ul><template x-for="s in sel.ai?.strengths || []"><li x-text="s"></li></template></ul></div>
+                <div><h4>Brechas</h4><ul><template x-for="s in sel.ai?.gaps || []"><li x-text="s"></li></template></ul></div>
+              </div>
+              <p class="pitch" x-text="sel.ai?.pitch"></p>
+            </div>
+            <label>Notas</label>
+            <textarea rows="2" x-model="sel.notes" @change="saveNotes(sel)" placeholder="Contacto, fecha de postulación…"></textarea>
+            <h3>Descripción</h3>
+            <div class="desc" x-html="highlight(sel.description)"></div>
+          </div>
+        </template>
+      </section>
+    </div>
+    </template>
+  </main>
+
+  <!-- ================= MIS OFERTAS ================= -->
+  <main x-show="tab==='mis'" class="page">
+    <div class="kanban">
+      <template x-for="st in ['interesante','postulada','entrevista','descartada']" :key="st">
+        <div class="col card">
+          <h3><span x-text="labels.status[st]"></span> <span class="pill" x-text="tracked.filter(j=>j.status===st).length"></span></h3>
+          <template x-for="j in tracked.filter(x=>x.status===st)" :key="j.id">
+            <div class="kcard">
+              <a :href="safeUrl(j.url)" target="_blank" rel="noopener noreferrer" class="jtitle" x-text="j.title"></a>
+              <div class="jmeta" x-text="(j.company||'—') + ' · ' + sourceLabel(j.source)"></div>
+              <div class="jmeta" x-show="j.notes" x-text="j.notes"></div>
+              <select @change="setStatus(j, $event.target.value); loadTracked()" aria-label="Estado">
+                <template x-for="s2 in meta.statuses"><option :value="s2" :selected="s2===j.status" x-text="labels.status[s2]"></option></template>
+              </select>
+            </div>
+          </template>
+          <p class="hint" x-show="!tracked.filter(j=>j.status===st).length">Sin ofertas</p>
+        </div>
+      </template>
+    </div>
+  </main>
+
+  <!-- ================= CONFIGURACIÓN ================= -->
+  <main x-show="tab==='config'" class="page">
+    <div class="form-grid two">
+      <section class="card">
+        <h2>Tu CV</h2>
+        <p class="hint">El servidor solo extrae el texto y no lo guarda. El texto queda en <strong>este navegador</strong> y se envía únicamente cuando pides un análisis con IA.</p>
+        <input type="file" accept=".pdf,.docx,.txt" @change="uploadCV($event)">
+        <div x-show="cv">
+          <p>Cargado: <strong x-text="cv?.filename"></strong> (<span x-text="cv?.text?.length"></span> caracteres)
+            <button class="btn ghost danger small" @click="clearCV()">Quitar CV</button></p>
+          <pre class="cv-preview" x-text="(cv?.text || '').slice(0, 600) + '…'"></pre>
+        </div>
+        <h2 class="mt">Privacidad</h2>
+        <p class="hint">JobRadar no tiene base de datos. Tus búsquedas, estados, notas, perfiles y CV viven en este navegador; tu API key va cifrada en una cookie segura (HttpOnly). Usa este botón en computadoras compartidas.</p>
+        <button class="btn ghost danger" @click="wipeAll()">Borrar todos mis datos de este navegador</button>
+      </section>
+      <section class="card">
+        <h2>Matching con IA</h2>
+        <p class="hint">Sin API key la app funciona igual, solo sin esta función.</p>
+        <label>Proveedor</label>
+        <select x-model="cfg.ai_provider" @change="onProviderChange()">
+          <template x-for="(pv, id) in meta.ai_providers"><option :value="id" x-text="pv.label" :selected="id===cfg.ai_provider"></option></template>
+        </select>
+        <label>API key de <span x-text="meta.ai_providers[cfg.ai_provider]?.label"></span>
+          <span x-show="settings.api_key_hint && cfg.ai_provider===settings.ai_provider" class="tag" x-text="'guardada: ' + settings.api_key_hint"></span>
+</label>
+        <input type="password" x-model="cfg.api_key" :placeholder="(meta.ai_providers[cfg.ai_provider]?.key_prefix || '') + '…'" autocomplete="off" spellcheck="false">
+        <p class="hint">La key se guarda cifrada en una cookie HttpOnly de tu navegador (30 días); nunca se muestra completa ni se guarda en el servidor.</p>
+        <p class="hint">Obtén tu key en <a :href="meta.ai_providers[cfg.ai_provider]?.key_url" target="_blank" rel="noopener" x-text="meta.ai_providers[cfg.ai_provider]?.key_url"></a></p>
+        <label>Modelo</label>
+        <select x-model="cfg.ai_model">
+          <template x-for="(lbl, id) in (meta.ai_providers[cfg.ai_provider]?.models || {})"><option :value="id" x-text="lbl" :selected="id===cfg.ai_model"></option></template>
+        </select>
+        <label>Ofertas a analizar por búsqueda (las de mayor puntaje)</label>
+        <input type="number" min="5" :max="meta.limits.max_ai_jobs || 50" x-model.number="cfg.ai_top_n">
+        <div class="actions">
+          <button class="btn primary" @click="saveSettings()">Guardar</button>
+          <button class="btn ghost danger" x-show="settings.api_key_hint" @click="saveSettings(true)">Borrar key</button>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+</body>
+</html>
