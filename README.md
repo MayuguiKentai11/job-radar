@@ -2,62 +2,84 @@
 
 Busca cientos de ofertas a la vez en **Indeed, LinkedIn, Computrabajo y Bumeran**. Las filtra según tus preferencias,
 elimina duplicados entre portales, las ordena por un **puntaje de relevancia (0-100)** y, si quieres, las compara con
-tu **CV usando IA (Google Gemini, o Claude como alternativa)**.
+tu **CV usando IA** (Google Gemini, o Claude como alternativa).
 
-## Iniciar
-Haz doble clic en **`run.bat`**. La primera vez crea el entorno e instala dependencias, lo que toma 1-2 minutos.
-Luego abre `http://localhost:8000`. Para detener la app, cierra la ventana negra.
+## Arquitectura: sin base de datos
+El servidor **no guarda nada**:
 
-Manual: `python -m venv .venv && .venv\Scripts\pip install -r requirements.txt && .venv\Scripts\python -m uvicorn app.main:app`
+| Dato | Dónde vive |
+|---|---|
+| Sesión de acceso | Cookie firmada `__Host-jr_session` (HttpOnly, Secure, SameSite=Strict, 7 días) |
+| API key de IA | Cookie **cifrada** `__Host-jr_ai` (Fernet/AES, HttpOnly, Secure, SameSite=Strict, 30 días). Nunca vuelve al navegador en claro. |
+| Búsquedas (últimas 5), estados, notas, perfiles, CV, análisis IA | `localStorage` de **tu navegador** |
+
+Los resultados de una búsqueda pesan cientos de KB, y una cookie solo admite unos 4 KB. Por eso esos datos viven en el
+navegador, no en cookies. La consecuencia es que **los datos son por navegador**: en otro equipo empiezas de cero. En
+Configuración puedes **borrar todos tus datos**.
+
+## Seguridad
+- **Acceso con contraseña** (`APP_PASSWORD`, mínimo 12 caracteres, obligatoria en producción). El login está limitado a 5 intentos cada 15 minutos por IP y la contraseña se compara en tiempo constante.
+- **Secretos solo por variables de entorno.** La app se niega a arrancar en producción sin `SECRET_KEY` (32+ caracteres) ni `APP_PASSWORD`.
+- **Protección CSRF:** cookies `SameSite=Strict`, cabecera personalizada obligatoria en todo POST y verificación de `Origin`.
+- **Cabeceras de seguridad:** CSP estricta (sin scripts inline), HSTS, `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy: no-referrer`, `Permissions-Policy`, COOP/CORP y `Cache-Control: no-store` en la API.
+- **XSS:** el texto de las ofertas siempre se escapa antes de mostrarse, y los enlaces solo aceptan `http(s)` (se bloquean `javascript:` y `data:`).
+- **Exportación a Excel/CSV:** se neutraliza la inyección de fórmulas (`=`, `+`, `-`, `@`).
+- **Límites contra abuso:**
+  - Hasta 2 búsquedas simultáneas en el servidor y 1 por IP.
+  - 30 búsquedas y 20 análisis IA por hora.
+  - Hasta 5 cargos por búsqueda y 100 ofertas por portal.
+  - Cuerpo de la petición ≤ 2 MB; CV ≤ 5 MB.
+- **Sin documentación de API pública** (`/docs` desactivado), sin cabecera `Server` y errores genéricos sin trazas.
+- **Contenedor endurecido:** corre como usuario sin privilegios (uid 10001) con el código en solo lectura. Las dependencias están fijadas y auditadas con `pip-audit` (0 vulnerabilidades conocidas).
+- **Limitación conocida:** la CSP incluye `'unsafe-eval'`, que Alpine.js necesita para evaluar sus expresiones. Se compensa sin scripts inline y escapando todo el contenido externo.
+
+## Desplegar en Render (gratis)
+1. Sube esta carpeta a un repositorio de GitHub (puede ser privado).
+2. En https://dashboard.render.com: **New → Blueprint**, conecta el repositorio y Render leerá `render.yaml`.
+3. Cuando lo pida, escribe tu **`APP_PASSWORD`** (12+ caracteres). `SECRET_KEY` se genera solo.
+4. **Apply.** En unos 5 minutos tendrás tu URL `https://jobradar-xxxx.onrender.com`.
+
+Plan gratuito: el servicio **se duerme tras 15 minutos sin uso**, y la primera visita tarda unos 50 segundos en despertarlo.
+Los portales pueden tratar distinto las IPs de centros de datos que tu conexión de casa. Si un portal falla en Render,
+el panel de progreso lo indica y los demás siguen funcionando.
+
+## Uso local
+Haz doble clic en **`run.bat`** y abre `http://localhost:8000`. En local no pide contraseña salvo que definas `APP_PASSWORD` en `.env`.
+Para probar la imagen de producción:
+`docker build -t jobradar . && docker run -p 10000:10000 -e SECRET_KEY=<48+ chars> -e APP_PASSWORD=<12+ chars> jobradar`
 
 ## Cómo usarlo
 1. **Buscar**
-   - **A. Qué buscar:** cargos (cada uno se busca por separado), ciudad, modalidad, antigüedad, jornada y portales.
-   - **B. Perfil:** nivel, salario mínimo (PEN o USD, convierte entre monedas) y tus años de experiencia.
+   - **A. Qué buscar:** cargos, ciudad, modalidad, antigüedad, jornada y portales.
+   - **B. Perfil:** nivel, salario mínimo (PEN o USD) y tus años de experiencia.
    - **C. Filtros finos:** palabras obligatorias, deseables y excluyentes, títulos a excluir, empresas bloqueadas e idioma.
-   - **D. Extras:** puntaje mínimo, mostrar solo nuevas y análisis con IA.
-   - **Guardar perfil** guarda la combinación para repetirla con un clic.
-2. **Resultados:** filtros rápidos sin volver a buscar. Al hacer clic en una oferta ves por qué obtuvo su puntaje, la descripción con tus palabras resaltadas (verde = deseables/obligatorias, rojo = excluyentes), los estados (Interesante, Postulé, Entrevista, Descartada) y notas. Desde aquí exportas a Excel o CSV.
+   - **D. Extras:** puntaje mínimo, solo nuevas y análisis con IA.
+   - Puedes guardar la combinación como perfil.
+2. **Resultados:** filtros rápidos; al abrir una oferta ves por qué obtuvo su puntaje, la descripción resaltada, los estados y tus notas. Desde aquí exportas a Excel o CSV.
 3. **Mis ofertas:** tablero con tus postulaciones por estado.
-4. **Configuración:** sube tu CV (PDF, DOCX o TXT), elige el proveedor de IA (Gemini por defecto) y pega tu API key.
+4. **Configuración:** CV, proveedor y modelo de IA, API key y borrado de datos.
 
-Si una oferta no aparece, el panel "Descartadas por filtros" muestra cuántas se eliminaron y por qué.
+**Puntaje:** título (35) + palabras deseables (30) + modalidad (15) + salario (10) + recencia (10). Solo cuentan los criterios que llenaste.
 
-## Cómo se calcula el puntaje
-Título vs. cargos (35) + palabras deseables (30) + modalidad (15) + salario (10) + recencia (10).
-Solo cuentan los criterios que llenaste, y el resultado se normaliza a 100.
+## IA: tu API key de Gemini
+1. Entra a https://aistudio.google.com/apikey y haz clic en **Create API key**. Empieza con `AIza`.
+2. En JobRadar → **Configuración**: proveedor Google Gemini, pega la key y haz clic en **Guardar**.
+
+Modelos: Gemini 3.8 Flash (recomendado), 3.5 Flash-Lite (más barato) o Pro. Si llegas al límite del plan gratuito, la app
+reintenta automáticamente. Aviso: en el plan gratuito de Gemini, Google puede usar los datos enviados (incluido tu CV)
+para mejorar sus productos.
 
 ## Portales
-| Portal | Estado | Notas |
-|---|---|---|
-| Indeed | ✅ | Rápido; muchas ofertas traen salario |
-| LinkedIn | ✅ | Más lento (unos 30 s por cada 25 ofertas con descripción). Bloquea temporalmente si abusas. |
-| Computrabajo | ✅ | Scraper propio: listado más detalle de cada oferta |
-| Bumeran | ✅ | Usa la API interna del sitio |
-| Google Jobs | ⚠ experimental | Google bloquea actualmente las consultas automáticas (devuelve 0) |
-| Glassdoor | ❌ | No tiene sitio para Perú en el motor usado |
-
-Si un portal cambia su página o te bloquea, los demás siguen funcionando, y el panel de progreso muestra el error de cada portal.
-
-## IA (opcional)
-Analiza las N ofertas con mayor puntaje (30 por defecto) frente a tu CV y devuelve afinidad, fortalezas, brechas y
-cómo enfocar la postulación. Los resultados se guardan en caché: no se paga dos veces por la misma oferta con el
-mismo CV y modelo.
-
-**Obtener tu API key de Gemini:**
-1. Entra a https://aistudio.google.com/apikey con tu cuenta de Google.
-2. Clic en **Create API key**. Elige o crea un proyecto y copia la key (empieza con `AIza`).
-3. En JobRadar → **Configuración**, elige **Google Gemini**, pega la key y haz clic en **Guardar**.
-
-Modelos: **Gemini 3.8 Flash** (recomendado), **3.5 Flash-Lite** (más barato) o **Pro** (mejor calidad). El nivel
-gratuito de Gemini tiene límites por minuto y por día. Si los alcanzas, la app te lo indica: reduce las
-"ofertas a analizar" o espera un momento. Claude sigue disponible como proveedor alternativo.
+| Portal | Estado |
+|---|---|
+| Indeed, LinkedIn, Computrabajo, Bumeran | ✅ (LinkedIn es el más lento) |
+| Google Jobs | ⚠ experimental: Google bloquea consultas automáticas |
+| Glassdoor | ❌ sin sitio para Perú |
 
 ## Tests
 ```
-.venv\Scripts\python -m pytest -q                # 53 pruebas offline
-.venv\Scripts\python -m tests.live.smoke_sources  # prueba en vivo contra los portales
+pip install -r requirements-dev.txt
+python -m pytest -q                  # 62 pruebas offline (incluye pruebas de seguridad)
+python -m tests.live.smoke_sources   # prueba en vivo contra los portales
 ```
-
-Tus datos (ofertas, estados, CV y key) se guardan solo en `data/jobradar.db`, en tu computadora.
 Herramienta de uso personal: usa frecuencias moderadas y respeta los términos de cada portal.
