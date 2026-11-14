@@ -33,7 +33,8 @@ DISABLED_SOURCES = {s.strip().lower() for s in os.environ.get("DISABLED_SOURCES"
 # Google Jobs via SerpApi: pages of 10 offers per role (each page uses 1 search of the user's SerpApi plan)
 SERPAPI_MAX_PAGES = max(1, min(int(os.environ.get("SERPAPI_MAX_PAGES", 2)), 5))
 SERPAPI_ENV_KEY = os.environ.get("SERPAPI_API_KEY", "").strip()
-DISABLED_SOURCE_MSG = "Este portal bloquea las consultas desde servidores en la nube. Funciona si usas JobRadar en tu PC (run.bat)."
+DISABLED_SOURCE_MSG = ("Este portal bloquea las consultas directas desde servidores en la nube. Sus ofertas llegan a través de "
+                       "Google Jobs (activa tu key de SerpApi en Configuración), o directo si usas JobRadar en tu PC (run.bat).")
 SESSION_MAX_AGE = int(os.environ.get("SESSION_MAX_AGE", 7 * 24 * 3600))
 AI_COOKIE_MAX_AGE = 30 * 24 * 3600
 

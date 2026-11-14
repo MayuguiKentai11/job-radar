@@ -127,3 +127,13 @@ def test_dedupe_company_name_variants():
     a = enrich(job(eid="1", source="computrabajo", company="Laureate", title="UPC Remoto: Analista de Datos"), "PEN")
     b = enrich(job(eid="2", source="bumeran", company="Laureate Perú", title="UPC Remoto: Analista de Datos"), "PEN")
     assert len(dedupe([a, b])) == 1
+
+
+def test_google_results_are_shown_as_their_original_portal():
+    from app.engine.search import to_result
+
+    li = enrich(job(source="google", eid="g1", url="https://pe.linkedin.com/jobs/view/1", extra={"via": "LinkedIn"}), "PEN")
+    other = enrich(job(source="google", eid="g2", url="https://empresa.pe/empleo", extra={"via": "Trabajando.pe"}), "PEN")
+    r1, r2 = to_result(li), to_result(other)
+    assert r1["source"] == "linkedin" and r1["via_google"] is True and r1["via"] is None
+    assert r2["source"] == "google" and r2["via_google"] is False and r2["via"] == "Trabajando.pe"

@@ -113,6 +113,7 @@ window.jobradar = function () {
 
     notify(msg) { this.toast = msg; clearTimeout(this._t); this._t = setTimeout(() => (this.toast = ""), 4000); },
     toggle(arr, v) { const i = arr.indexOf(v); i >= 0 ? arr.splice(i, 1) : arr.push(v); },
+    portalText(j) { return this.sourceLabel(j.source) + (j.via_google ? " (vía Google)" : j.via ? " · vía " + j.via : ""); },
     sourceLabel(k) { return (this.meta.sources.find(s => s.key === k) || {}).label || k; },
     affinity(s) { return s == null ? "" : s >= 75 ? "alta" : s >= 50 ? "media" : "baja"; },
     safeUrl,

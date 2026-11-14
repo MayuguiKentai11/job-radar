@@ -98,19 +98,33 @@ def process(postings: list[JobPosting], p: SearchParams):
     return kept, rejected, len(enriched) - len(unique)
 
 
+_VIA_PORTALS = {"linkedin": "linkedin", "bumeran": "bumeran", "computrabajo": "computrabajo", "indeed": "indeed"}
+
+
+def portal_of(j: JobPosting) -> tuple[str, bool]:
+    """Portal to show for an offer. Google Jobs results published on LinkedIn/Bumeran/… are shown as that portal.
+    Returns (portal key, found_through_google)."""
+    via = ((j.extra or {}).get("via") or "").lower() if j.source == "google" else ""
+    for needle, key in _VIA_PORTALS.items():
+        if needle in via:
+            return key, True
+    return j.source, False
+
+
 def to_result(e: Enriched) -> Optional[dict]:
     j = e.job
     url = safe_url(j.url)
     if not url:
         return None
+    portal, via_google = portal_of(j)
     return {
-        "id": j.uid, "source": j.source, "title": j.title[:300], "company": (j.company or "")[:200] or None,
+        "id": j.uid, "source": portal, "via_google": via_google, "title": j.title[:300], "company": (j.company or "")[:200] or None,
         "location": (j.location or "")[:200] or None, "url": url,
         "description": (j.description or "")[:20_000] or None,
         "date_posted": j.date_posted.isoformat() if j.date_posted else None,
         "modality": e.modality, "level": e.level, "job_types": sorted(e.job_types), "required_years": e.required_years,
         "salary_min": j.salary_min, "salary_max": j.salary_max, "salary_currency": j.salary_currency,
-        "salary_period": j.salary_period, "via": (j.extra or {}).get("via"), "score": e.score, "reasons": e.reasons, "also_on": e.also_on,
+        "salary_period": j.salary_period, "via": None if via_google else (j.extra or {}).get("via"), "score": e.score, "reasons": e.reasons, "also_on": e.also_on,
     }
 
 

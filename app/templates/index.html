@@ -70,6 +70,7 @@
               <small x-show="s.experimental && !s.unavailable" class="tag warn">experimental</small>
               <small x-show="s.unavailable" class="tag muted">no disponible</small>
               <a href="#" x-show="!s.unavailable && sourceOff(s)" class="tag warn" @click.prevent="tab='config'">requiere key</a>
+              <small x-show="s.key==='google'" class="muted-note">incluye ofertas de LinkedIn y Bumeran</small>
             </label>
           </template>
         </div>
@@ -216,7 +217,7 @@
                 <span x-text="j.company || '—'"></span> · <span x-text="j.location || '—'"></span>
               </div>
               <div class="jtags">
-                <span class="tag src" x-text="sourceLabel(j.source) + (j.via ? ' · vía ' + j.via : '')"></span>
+                <span class="tag src" :title="j.via_google ? 'Encontrada a través de Google Jobs' : ''" x-text="portalText(j)"></span>
                 <template x-for="o in j.also_on"><span class="tag src alt" x-text="'+ ' + sourceLabel(o)"></span></template>
                 <span class="tag" x-show="j.modality" x-text="labels.mod[j.modality]"></span>
                 <span class="tag" x-show="j.level" x-text="labels.level[j.level]"></span>
@@ -235,7 +236,7 @@
           <div>
             <button class="close" @click="sel=null" aria-label="Cerrar">✕</button>
             <h2 x-text="sel.title"></h2>
-            <div class="jmeta"><strong x-text="sel.company || '—'"></strong> · <span x-text="sel.location || '—'"></span> · <span x-text="sourceLabel(sel.source) + (sel.via ? ' · vía ' + sel.via : '')"></span></div>
+            <div class="jmeta"><strong x-text="sel.company || '—'"></strong> · <span x-text="sel.location || '—'"></span> · <span x-text="portalText(sel)"></span></div>
             <div class="status-bar">
               <template x-for="st in meta.statuses"><button class="chip" :class="{on: sel.status===st}" @click="setStatus(sel, st)" x-text="labels.status[st]"></button></template>
             </div>
