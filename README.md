@@ -10,7 +10,7 @@ El servidor **no guarda nada**:
 | Dato | Dónde vive |
 |---|---|
 | Sesión de acceso | Cookie firmada `__Host-jr_session` (HttpOnly, Secure, SameSite=Strict, 7 días) |
-| API key de IA | Cookie **cifrada** `__Host-jr_ai` (Fernet/AES, HttpOnly, Secure, SameSite=Strict, 30 días). Nunca vuelve al navegador en claro. |
+| API keys (IA y SerpApi) | Cookie **cifrada** `__Host-jr_ai` (Fernet/AES, HttpOnly, Secure, SameSite=Strict, 30 días). Nunca vuelve al navegador en claro. |
 | Búsquedas (últimas 5), estados, notas, perfiles, CV, análisis IA | `localStorage` de **tu navegador** |
 
 Los resultados de una búsqueda pesan cientos de KB, y una cookie solo admite unos 4 KB. Por eso esos datos viven en el
@@ -76,15 +76,20 @@ para mejorar sus productos.
 |---|---|---|
 | Indeed, Computrabajo | ✅ | ✅ |
 | LinkedIn, Bumeran | ✅ | ❌ bloquean las IPs de servidores en la nube (desactivados con `DISABLED_SOURCES`) |
-| Google Jobs | ❌ Google bloquea las búsquedas automáticas | ❌ |
+| Google Jobs (vía SerpApi) | ✅ con tu key | ✅ con tu key: también trae ofertas publicadas en LinkedIn, Bumeran y webs de empresas |
 | Glassdoor | ❌ sin sitio para Perú | ❌ |
 
 Al hacer clic en el logo **JobRadar** vuelves al buscador limpio.
 
+## Google Jobs con SerpApi (recomendado en Render)
+1. Crea una cuenta gratuita en https://serpapi.com/users/sign_up y copia tu key en https://serpapi.com/manage-api-key.
+2. En JobRadar → **Configuración → Google Jobs (SerpApi)**, pégala y haz clic en **Guardar key**. Se guarda cifrada en una cookie, igual que la de IA.
+3. Cada cargo buscado usa 1 o 2 búsquedas de tu plan (10 ofertas por búsqueda; `SERPAPI_MAX_PAGES` lo ajusta).
+
 ## Tests
 ```
 pip install -r requirements-dev.txt
-python -m pytest -q                  # 66 pruebas offline (incluye pruebas de seguridad)
+python -m pytest -q                  # 75 pruebas offline (incluye pruebas de seguridad)
 python -m tests.live.smoke_sources   # prueba en vivo contra los portales
 ```
 Herramienta de uso personal: usa frecuencias moderadas y respeta los términos de cada portal.

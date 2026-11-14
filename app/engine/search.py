@@ -23,7 +23,7 @@ def _single_job_type(p: SearchParams) -> Optional[str]:
     return p.job_types[0] if len(p.job_types) == 1 else None
 
 
-def run_source(key: str, p: SearchParams, emit, sources=None) -> list[JobPosting]:
+def run_source(key: str, p: SearchParams, emit, sources=None, credentials: Optional[dict] = None) -> list[JobPosting]:
     src = (sources or SOURCES).get(key)
 
     def status(st, count, message):
@@ -36,6 +36,10 @@ def run_source(key: str, p: SearchParams, emit, sources=None) -> list[JobPosting
     if msg:
         status("no_disponible", 0, msg)
         return []
+    api_key = (credentials or {}).get(key)
+    if getattr(src, "needs_key", False) and not api_key:
+        status("no_disponible", 0, "Agrega tu key de SerpApi en Configuración para usar este portal.")
+        return []
     terms = p.keywords or [""]
     found: list[JobPosting] = []
     errors: list[str] = []
@@ -43,7 +47,7 @@ def run_source(key: str, p: SearchParams, emit, sources=None) -> list[JobPosting
         q = SourceQuery(
             term=term, location=p.location, country=p.country, hours_old=p.hours_old,
             limit=p.max_per_source, remote_only=p.modalities == ["remoto"],
-            job_type=_single_job_type(p), fetch_descriptions=p.fetch_descriptions,
+            job_type=_single_job_type(p), fetch_descriptions=p.fetch_descriptions, api_key=api_key,
         )
         prefix = f"«{term}» ({i + 1}/{len(terms)}) " if len(terms) > 1 else ""
         base = len(found)
@@ -106,11 +110,11 @@ def to_result(e: Enriched) -> Optional[dict]:
         "date_posted": j.date_posted.isoformat() if j.date_posted else None,
         "modality": e.modality, "level": e.level, "job_types": sorted(e.job_types), "required_years": e.required_years,
         "salary_min": j.salary_min, "salary_max": j.salary_max, "salary_currency": j.salary_currency,
-        "salary_period": j.salary_period, "score": e.score, "reasons": e.reasons, "also_on": e.also_on,
+        "salary_period": j.salary_period, "via": (j.extra or {}).get("via"), "score": e.score, "reasons": e.reasons, "also_on": e.also_on,
     }
 
 
-def stream_search(p: SearchParams, sources=None, on_finish=None) -> Iterator[dict]:
+def stream_search(p: SearchParams, sources=None, on_finish=None, credentials: Optional[dict] = None) -> Iterator[dict]:
     """Yield progress events, then {"type": "done", "results": [...], "summary": {...}}.
     `on_finish` is always called once the background work ends (used to release concurrency slots)."""
     events: "queue.Queue" = queue.Queue()
@@ -119,7 +123,7 @@ def stream_search(p: SearchParams, sources=None, on_finish=None) -> Iterator[dic
     def worker():
         try:
             with ThreadPoolExecutor(max(1, len(p.sources))) as ex:
-                batches = list(ex.map(lambda k: run_source(k, p, events.put, sources), p.sources))
+                batches = list(ex.map(lambda k: run_source(k, p, events.put, sources, credentials), p.sources))
             postings = [j for b in batches for j in b]
             events.put({"type": "phase", "phase": "filtrando"})
             kept, rejected, dupes = process(postings, p)

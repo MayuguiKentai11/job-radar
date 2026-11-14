@@ -55,6 +55,9 @@ input[type=checkbox] { accent-color: var(--accent); width: 16px; height: 16px; }
 .hint { color: var(--muted); font-size: 12.5px; }
 .notice { background: var(--warn-soft); color: var(--text); border-radius: 8px; padding: 8px 10px; font-size: 13px; margin: 8px 0; }
 .notice a { color: inherit; font-weight: 600; }
+.steps { margin: 4px 0 8px; padding-left: 20px; }
+.steps li { margin: 2px 0; }
+a.tag { text-decoration: none; }
 .error { color: var(--bad); }
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }

@@ -51,6 +51,7 @@ class SourceQuery:
     remote_only: bool = False
     job_type: Optional[str] = None  # single normalized type when exactly one chosen
     fetch_descriptions: bool = True
+    api_key: Optional[str] = field(default=None, repr=False)  # for sources that need the user's own key
 
 
 class SourceError(Exception):
@@ -58,6 +59,7 @@ class SourceError(Exception):
 
 
 class Source:
+    needs_key = False  # True: the user must save an API key in Configuración
     key: str = ""
     label: str = ""
     experimental: bool = False

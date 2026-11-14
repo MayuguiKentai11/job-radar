@@ -23,6 +23,7 @@ from app import config, security
 from app.engine import ai_match
 from app.engine.params import JOB_TYPES, LEVELS, MODALITIES, SearchParams
 from app.engine.search import stream_search
+from app.sources import serpapi_jobs
 from app.sources.registry import SOURCES
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
@@ -113,7 +114,8 @@ auth = Depends(security.require_auth)
 def meta(country: str = "peru"):
     return {
         "sources": [
-            {"key": s.key, "label": s.label, "experimental": s.experimental, "unavailable": s.unavailable(country)}
+            {"key": s.key, "label": s.label, "experimental": s.experimental, "unavailable": s.unavailable(country),
+             "needs_key": getattr(s, "needs_key", False)}
             for s in SOURCES.values()
         ],
         "modalities": MODALITIES, "levels": LEVELS, "job_types": JOB_TYPES,
@@ -131,7 +133,16 @@ def _ai_settings(request: Request) -> dict:
     keys = data.get("keys") or {}
     models = data.get("models") or {}
     model = models.get(provider) if models.get(provider) in ai_match.PROVIDERS[provider]["models"] else ai_match.default_model(provider)
-    return {"provider": provider, "keys": keys, "models": models, "model": model, "top_n": int(data.get("top_n") or 30)}
+    return {"provider": provider, "keys": keys, "models": models, "model": model, "top_n": int(data.get("top_n") or 30),
+            "source_keys": data.get("source_keys") or {}}
+
+
+def _source_credentials(request: Request) -> dict:
+    """API keys for portals that need one (Google Jobs via SerpApi): user's cookie first, then env."""
+    keys = dict(_ai_settings(request)["source_keys"])
+    if not keys.get("google") and config.SERPAPI_ENV_KEY:
+        keys["google"] = config.SERPAPI_ENV_KEY
+    return keys
 
 
 def _public_settings(s: dict) -> dict:
@@ -139,7 +150,13 @@ def _public_settings(s: dict) -> dict:
     return {
         "ai_provider": s["provider"], "ai_model": s["model"], "ai_top_n": s["top_n"],
         "has_api_key": bool(key), "api_key_hint": (key[:4] + "…" + key[-4:]) if key else None,
+        **_serpapi_public(s["source_keys"].get("google")),
     }
+
+
+def _serpapi_public(key: Optional[str]) -> dict:
+    env = bool(config.SERPAPI_ENV_KEY)
+    return {"has_serpapi_key": bool(key) or env, "serpapi_key_hint": (key[:4] + "…" + key[-4:]) if key else ("del servidor" if env else None)}
 
 
 @app.get("/api/settings", dependencies=[auth])
@@ -153,6 +170,8 @@ class SettingsIn(BaseModel):
     ai_model: Optional[str] = None
     ai_top_n: Optional[int] = Field(None, ge=5, le=config.MAX_AI_JOBS)
     clear_api_key: bool = False
+    serpapi_key: Optional[str] = Field(None, max_length=200)
+    clear_serpapi_key: bool = False
 
 
 @app.post("/api/settings", dependencies=[auth])
@@ -179,8 +198,16 @@ def save_settings(body: SettingsIn, request: Request):
     s["model"] = s["models"][prov]
     if body.ai_top_n:
         s["top_n"] = body.ai_top_n
+    if body.clear_serpapi_key:
+        s["source_keys"].pop("google", None)
+    elif body.serpapi_key and body.serpapi_key.strip():
+        sk = body.serpapi_key.strip()
+        if not serpapi_jobs.valid_key(sk):
+            raise HTTPException(400, "La key no tiene el formato de SerpApi (letras y números, sin espacios).")
+        s["source_keys"]["google"] = sk
     resp = JSONResponse(_public_settings(s))
-    security.set_ai_cookie(resp, {"provider": prov, "keys": s["keys"], "models": s["models"], "top_n": s["top_n"]})
+    security.set_ai_cookie(resp, {"provider": prov, "keys": s["keys"], "models": s["models"], "top_n": s["top_n"],
+                                  "source_keys": s["source_keys"]})
     return resp
 
 
@@ -230,7 +257,8 @@ def search(params: SearchParams, request: Request):
                 del _active_by_ip[ip]
         _search_slots.release()
 
-    return StreamingResponse(_ndjson(stream_search(params, on_finish=release)), media_type="application/x-ndjson",
+    creds = _source_credentials(request)
+    return StreamingResponse(_ndjson(stream_search(params, on_finish=release, credentials=creds)), media_type="application/x-ndjson",
                              headers={"X-Accel-Buffering": "no"})
 
 

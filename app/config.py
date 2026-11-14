@@ -30,6 +30,9 @@ AUTH_REQUIRED = bool(APP_PASSWORD)
 # Portals that refuse requests coming from cloud servers (datacenter IPs). Listed here they are shown as
 # "no disponible" instead of failing on every search. Example on Render: DISABLED_SOURCES=linkedin,bumeran,google
 DISABLED_SOURCES = {s.strip().lower() for s in os.environ.get("DISABLED_SOURCES", "").split(",") if s.strip()}
+# Google Jobs via SerpApi: pages of 10 offers per role (each page uses 1 search of the user's SerpApi plan)
+SERPAPI_MAX_PAGES = max(1, min(int(os.environ.get("SERPAPI_MAX_PAGES", 2)), 5))
+SERPAPI_ENV_KEY = os.environ.get("SERPAPI_API_KEY", "").strip()
 DISABLED_SOURCE_MSG = "Este portal bloquea las consultas desde servidores en la nube. Funciona si usas JobRadar en tu PC (run.bat)."
 SESSION_MAX_AGE = int(os.environ.get("SESSION_MAX_AGE", 7 * 24 * 3600))
 AI_COOKIE_MAX_AGE = 30 * 24 * 3600

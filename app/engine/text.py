@@ -262,7 +262,7 @@ def extract_required_years(text: str) -> Optional[int]:
 
 # ---------- salary ----------
 _SAL_RE = re.compile(
-    r"(s/\.?|s\./|pen|usd|us\$|\$)\s*([\d.,]+)(?:\s*(?:-|a|hasta)\s*(?:s/\.?|usd|\$)?\s*([\d.,]+))?",
+    r"(s/\.?|s\./|pen|usd|us\$|\$)\s*([\d.,]+)(?:\s*(?:-|–|a|hasta)\s*(?:s/\.?|usd|\$)?\s*([\d.,]+))?",
     re.I,
 )
 

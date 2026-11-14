@@ -328,3 +328,31 @@ def test_disabled_sources_are_reported_not_searched(monkeypatch):
     assert events[-1]["status"] == "no_disponible" and "run.bat" in events[-1]["message"]
     assert SOURCES["bumeran"].unavailable("peru") == config.DISABLED_SOURCE_MSG
     assert SOURCES["indeed"].unavailable("peru") is None
+
+
+def test_serpapi_key_saved_encrypted_and_used_for_google(client):
+    import app.main as main
+
+    bad = client.post("/api/settings", json={"serpapi_key": "no valida!"})
+    assert bad.status_code == 400
+    key = "b" * 64
+    r = client.post("/api/settings", json={"serpapi_key": key})
+    assert r.status_code == 200 and r.json()["has_serpapi_key"] and key not in r.text
+    cookie = "; ".join(f"{k}={v}" for k, v in client.cookies.items())
+    assert key not in cookie
+    from starlette.requests import Request
+
+    scope = {"type": "http", "headers": [(b"cookie", cookie.encode())]}
+    assert main._source_credentials(Request(scope))["google"] == key
+    # AI settings are kept when saving the SerpApi key and vice versa
+    assert client.get("/api/settings").json()["has_serpapi_key"]
+    assert client.post("/api/settings", json={"clear_serpapi_key": True}).json()["has_serpapi_key"] is False
+
+
+def test_google_without_key_is_reported_not_searched():
+    from app.engine.params import SearchParams
+    from app.engine.search import run_source
+
+    events = []
+    assert run_source("google", SearchParams(keywords=["x"]), events.append) == []
+    assert events[-1]["status"] == "no_disponible" and "SerpApi" in events[-1]["message"]

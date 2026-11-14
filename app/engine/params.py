@@ -24,7 +24,7 @@ class SearchParams(BaseModel):
     modalities: list[str] = Field(default_factory=list)
     hours_old: Optional[int] = Field(168, ge=0, le=24 * 365)
     job_types: list[str] = Field(default_factory=list)
-    sources: list[str] = Field(default_factory=lambda: ["indeed", "linkedin", "computrabajo", "bumeran"])
+    sources: list[str] = Field(default_factory=lambda: ["indeed", "linkedin", "computrabajo", "bumeran", "google"])
     max_per_source: int = 50
     fetch_descriptions: bool = True
     # B. Perfil y condiciones

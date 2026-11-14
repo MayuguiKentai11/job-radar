@@ -96,7 +96,7 @@ window.jobradar = function () {
       phase: { buscando: "buscando en portales…", filtrando: "filtrando y ordenando…", ia: "analizando con IA…", listo: "listo ✓", error: "error" },
     },
     form: emptyForm({}),
-    settings: {}, cfg: { ai_provider: "gemini", api_key: "", ai_model: "", ai_top_n: 30 },
+    settings: {}, cfg: { ai_provider: "gemini", api_key: "", ai_model: "", ai_top_n: 30, serpapi_key: "" },
     cv: store.get("cv", null),
     profiles: store.get("profiles", []), profileId: "", profileName: "",
     runs: [], runId: null, status: null, searching: false, summary: null,
@@ -106,9 +106,9 @@ window.jobradar = function () {
     async init() {
       this.meta = await api("/api/meta");
       this.form = emptyForm(this.meta.defaults);
-      this.form.sources = this.meta.defaults.sources.filter(k => !this.meta.sources.find(s => s.key === k)?.unavailable);
-      this.loadRuns();
       await this.loadSettings();
+      this.form.sources = this.defaultSources();
+      this.loadRuns();
     },
 
     notify(msg) { this.toast = msg; clearTimeout(this._t); this._t = setTimeout(() => (this.toast = ""), 4000); },
@@ -148,6 +148,24 @@ window.jobradar = function () {
     },
 
     // ---------- settings / CV ----------
+    sourceOff(s) {
+      // why a portal cannot be used right now ("" = available)
+      if (s.unavailable) return s.unavailable;
+      if (s.needs_key && !this.settings.has_serpapi_key) return "Requiere tu key gratuita de SerpApi (Configuración → Google Jobs).";
+      return "";
+    },
+    defaultSources() { return this.meta.defaults.sources.filter(k => { const s = this.meta.sources.find(x => x.key === k); return s && !this.sourceOff(s); }); },
+    async saveSerpApi(clear = false) {
+      try {
+        const key = (this.cfg.serpapi_key || "").trim();
+        if (!clear && !key) return this.notify("Pega tu key de SerpApi");
+        this.settings = await api("/api/settings", { method: "POST", body: clear ? { clear_serpapi_key: true } : { serpapi_key: key } });
+        this.cfg.serpapi_key = "";
+        if (!clear && !this.form.sources.includes("google")) this.form.sources.push("google");
+        if (clear || !this.settings.has_serpapi_key) this.form.sources = this.form.sources.filter(k => k !== "google");
+        this.notify(clear ? "Key de SerpApi eliminada" : "Key de SerpApi guardada: Google Jobs activado");
+      } catch (e) { this.notify(e.message); }
+    },
     async loadSettings() {
       this.settings = await api("/api/settings");
       this.cfg.ai_provider = this.settings.ai_provider;
@@ -193,7 +211,7 @@ window.jobradar = function () {
       // logo click: back to a clean search form (saved data, history and results are kept)
       this.profileId = ""; this.profileName = "";
       this.form = emptyForm(this.meta.defaults);
-      this.form.sources = this.meta.defaults.sources.filter(k => !this.meta.sources.find(s => s.key === k)?.unavailable);
+      this.form.sources = this.defaultSources();
       if (!this.searching) this.status = null;
       this.sel = null; this.tab = "buscar";
       window.scrollTo({ top: 0, behavior: "smooth" });
