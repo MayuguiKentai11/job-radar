@@ -18,6 +18,7 @@ class SearchParams(BaseModel):
 
     # A. Qué buscar
     keywords: list[str] = Field(default_factory=list)
+    similar_titles: bool = False  # False: the title must contain the role (or a synonym)
     location: str = "Lima"
     country: str = "peru"
     modalities: list[str] = Field(default_factory=list)

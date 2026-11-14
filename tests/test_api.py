@@ -301,9 +301,10 @@ def test_export_neutralizes_formulas_and_bad_links(client):
 
     ws = load_workbook(io.BytesIO(x.content)).active
     assert ws.max_row == 3
-    assert ws.cell(2, 3).value.startswith("'=") and ws.cell(2, 4).value == "'+cmd"
-    assert ws.cell(2, 15).value in (None, "") and ws.cell(3, 15).value == "https://ok.example/1"
-    assert ws.cell(2, 8).value == "PEN 2,200/mes"
+    assert ws.cell(2, 1).value.startswith("'=") and ws.cell(2, 3).value == "'+cmd"
+    assert ws.cell(2, 14).value in (None, "") and ws.cell(3, 14).value == "https://ok.example/1"
+    assert ws.cell(2, 7).value == "PEN 2,200/mes"
+    assert "Puntaje" not in [c.value for c in ws[1]]
     c = client.post("/api/export", json={"rows": rows, "fmt": "csv"})
     assert "Puesto" in c.content.decode("utf-8-sig").splitlines()[0]
 

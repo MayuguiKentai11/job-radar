@@ -19,7 +19,7 @@ function emptyForm(defaults) {
   f.hours_old = f.hours_old ?? 0;
   f.salary_min = f.salary_min ?? "";
   f.years_experience = f.years_experience ?? "";
-  f.only_new = !!f.only_new; f.ai_match = !!f.ai_match;
+  f.only_new = !!f.only_new; f.ai_match = !!f.ai_match; f.similar_titles = !!f.similar_titles;
   return f;
 }
 
@@ -30,6 +30,7 @@ function formToParams(f) {
   p.hours_old = f.hours_old || null;
   p.salary_min = f.salary_min === "" ? null : f.salary_min;
   p.years_experience = f.years_experience === "" ? null : Number(f.years_experience);
+  p.min_score = 0; // relevance only orders results; it never hides them
   return p;
 }
 
@@ -92,7 +93,7 @@ window.jobradar = function () {
       level: { practicante: "Practicante", junior: "Junior", "semi-senior": "Semi-senior", senior: "Senior", jefatura: "Jefatura" },
       type: { tiempo_completo: "Tiempo completo", medio_tiempo: "Medio tiempo", practicas: "Prácticas", temporal: "Temporal", freelance: "Freelance" },
       status: { nueva: "Nueva", interesante: "Interesante", postulada: "Postulé", entrevista: "Entrevista", descartada: "Descartada" },
-      phase: { buscando: "buscando en portales…", filtrando: "filtrando y puntuando…", ia: "analizando con IA…", listo: "listo ✓", error: "error" },
+      phase: { buscando: "buscando en portales…", filtrando: "filtrando y ordenando…", ia: "analizando con IA…", listo: "listo ✓", error: "error" },
     },
     form: emptyForm({}),
     settings: {}, cfg: { ai_provider: "gemini", api_key: "", ai_model: "", ai_top_n: 30 },
@@ -100,7 +101,7 @@ window.jobradar = function () {
     profiles: store.get("profiles", []), profileId: "", profileName: "",
     runs: [], runId: null, status: null, searching: false, summary: null,
     results: [], sel: null, tracked: [], aiRunning: false, aiProgress: null, toast: "",
-    qf: { text: "", minScore: 0, sort: "score", sources: [], modalities: [], statuses: [], onlyNew: false, withSalary: false, hideDiscarded: true },
+    qf: { text: "", sort: "score", sources: [], modalities: [], statuses: [], onlyNew: false, withSalary: false, hideDiscarded: true },
 
     async init() {
       this.meta = await api("/api/meta");
@@ -113,7 +114,7 @@ window.jobradar = function () {
     notify(msg) { this.toast = msg; clearTimeout(this._t); this._t = setTimeout(() => (this.toast = ""), 4000); },
     toggle(arr, v) { const i = arr.indexOf(v); i >= 0 ? arr.splice(i, 1) : arr.push(v); },
     sourceLabel(k) { return (this.meta.sources.find(s => s.key === k) || {}).label || k; },
-    scoreClass(s) { return s >= 75 ? "hi" : s >= 50 ? "mid" : "lo"; },
+    affinity(s) { return s == null ? "" : s >= 75 ? "alta" : s >= 50 ? "media" : "baja"; },
     safeUrl,
     ago(d) {
       const days = Math.round((new Date().setHours(0, 0, 0, 0) - new Date(d + "T00:00:00")) / 86400000);
@@ -246,17 +247,18 @@ window.jobradar = function () {
       const seen = new Set(store.get("seen", []));
       let results = done.results.map(r => ({ ...r, is_new: !seen.has(r.id) }));
       const summary = { ...done.summary, sources: this.status.sources, new: results.filter(r => r.is_new).length };
+      let hidden = []; // offers hidden as already seen; "Mostrarlas" brings them back
       if (params.only_new) {
-        const before = results.length;
+        hidden = results.filter(r => !r.is_new);
         results = results.filter(r => r.is_new);
-        if (before - results.length) summary.rejected = { ...summary.rejected, "Ya vista en búsquedas anteriores": before - results.length };
+        if (hidden.length) summary.rejected = { ...summary.rejected, "Ya vista en búsquedas anteriores": hidden.length };
       }
       summary.kept = results.length;
       const allSeen = [...seen, ...done.results.map(r => r.id).filter(id => !seen.has(id))];
       store.set("seen", allSeen.slice(-MAX_SEEN));
       const run = {
         id: Date.now(), started: new Date().toLocaleString("es-PE", { dateStyle: "short", timeStyle: "short" }),
-        keywords: String(params.keywords).split(",").map(s => s.trim()).filter(Boolean), params, summary, results,
+        keywords: String(params.keywords).split(",").map(s => s.trim()).filter(Boolean), params, summary, results, hidden,
       };
       this.saveRun(run);
       this.status.phase = "listo";
@@ -271,6 +273,13 @@ window.jobradar = function () {
       this.qf.sources = []; this.qf.modalities = []; this.qf.statuses = [];
       this.tab = "resultados";
     },
+    showSeen() {
+      const run = store.get("runs", []).find(r => r.id === this.runId);
+      if (!run?.hidden?.length) return this.notify("Esa información ya no está disponible");
+      this.results = this.mergeLocal([...run.results, ...run.hidden]);
+      const rej = { ...this.summary.rejected }; delete rej["Ya vista en búsquedas anteriores"];
+      this.summary = { ...this.summary, rejected: rej };
+    },
     deleteRun(id) {
       store.set("runs", store.get("runs", []).filter(r => r.id !== id)); this.loadRuns();
       if (this.runId === id) { this.runId = null; this.results = []; this.summary = null; }
@@ -279,7 +288,6 @@ window.jobradar = function () {
     get filtered() {
       const q = this.qf, t = q.text.trim().toLowerCase();
       const out = this.results.filter(j =>
-        j.score >= q.minScore &&
         (!q.sources.length || q.sources.includes(j.source)) &&
         (!q.modalities.length || q.modalities.includes(j.modality)) &&
         (!q.statuses.length || q.statuses.includes(j.status)) &&

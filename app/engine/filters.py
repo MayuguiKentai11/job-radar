@@ -16,6 +16,7 @@ from app.engine.text import (
     detect_modality,
     extract_required_years,
     norm,
+    title_matches,
     to_monthly,
 )
 from app.sources.base import JobPosting
@@ -77,6 +78,8 @@ def apply_filters(e: Enriched, p: SearchParams, today: Optional[date] = None) ->
     text_n = e.text_norm
     has_desc = bool(j.description and len(j.description) > 80)
 
+    if p.keywords and not p.similar_titles and not any(title_matches(j.title, kw) for kw in p.keywords):
+        return "El cargo no coincide con lo buscado"
     if p.hours_old and j.date_posted:
         if (today - j.date_posted).days > max(1, p.hours_old // 24):
             return "Fuera del rango de fecha"
@@ -131,7 +134,7 @@ def score(e: Enriched, p: SearchParams, today: Optional[date] = None) -> tuple[i
         best_kw, best = "", 0.0
         for kw in p.keywords:
             kn = norm(kw)
-            if contains_term(title_n, kw):
+            if contains_term(title_n, kw) or title_matches(j.title, kw):
                 r = 100.0
             else:
                 r = max(fuzz.token_set_ratio(kn, title_n), fuzz.partial_ratio(kn, title_n) * 0.9)
@@ -141,11 +144,11 @@ def score(e: Enriched, p: SearchParams, today: Optional[date] = None) -> tuple[i
         got += pts
         total += 35
         if pts >= 30:
-            reasons.append(f"Título coincide con «{best_kw}»")
+            reasons.append(f"El cargo coincide con «{best_kw}»")
         elif pts > 0:
-            reasons.append(f"Título similar a «{best_kw}» ({int(best)}%)")
+            reasons.append(f"Cargo parecido a «{best_kw}»")
         else:
-            reasons.append("Título poco relacionado")
+            reasons.append("Cargo poco relacionado")
 
     # Nice-to-have skills (30)
     if p.nice_to_have:
@@ -153,9 +156,9 @@ def score(e: Enriched, p: SearchParams, today: Optional[date] = None) -> tuple[i
         got += 30.0 * len(hits) / len(p.nice_to_have)
         total += 30
         if hits:
-            reasons.append("Deseables: " + ", ".join(hits))
+            reasons.append("Menciona: " + ", ".join(hits))
         elif not has_desc:
-            reasons.append("Sin descripción para evaluar deseables")
+            reasons.append("Sin descripción para revisar tus palabras deseables")
 
     # Must-have confirmation (bonus visibility only)
     if p.must_have and not has_desc:
@@ -215,7 +218,10 @@ def dedupe(items: list[Enriched]) -> list[Enriched]:
             if k.job.source == e.job.source and k.job.external_id == e.job.external_id:
                 dup = k
                 break
-            same_company = bool(comp and kc) and (comp == kc or fuzz.ratio(comp, kc) >= 88)
+            same_company = bool(comp and kc) and (
+                comp == kc or fuzz.ratio(comp, kc) >= 88
+                or (min(len(comp), len(kc)) >= 4 and (comp in kc or kc in comp))  # "Laureate" vs "Laureate Peru"
+            )
             if same_company and fuzz.token_sort_ratio(title, kt) >= 92:
                 dup = k
                 break

@@ -48,6 +48,115 @@ def split_list(value) -> list[str]:
     return [v.strip() for v in value if v and v.strip()]
 
 
+# ---------- job title relevance ----------
+# Words that mean the same thing in job titles (Spanish / English / common abbreviations).
+# A group may contain multi-word phrases; matching is accent-insensitive and on whole words.
+_SYNONYM_GROUPS = [
+    {"analista", "analyst"},
+    {"datos", "data", "bi", "business intelligence", "inteligencia de negocios", "analytics", "analitica", "power bi"},
+    {"cientifico", "scientist", "data science", "ciencia de datos"},
+    {"ingeniero", "engineer", "ing"},
+    {"desarrollador", "developer", "programador", "dev"},
+    {"especialista", "specialist", "expert"},
+    {"asistente", "assistant", "auxiliar"},
+    {"practicante", "intern", "trainee", "practicas", "pasante"},
+    {"gerente", "manager"},
+    {"jefe", "head", "lider", "lead"},
+    {"coordinador", "coordinator"},
+    {"consultor", "consultant"},
+    {"ejecutivo", "executive"},
+    {"administrador", "administrator", "admin"},
+    {"contador", "accountant", "contable", "contabilidad"},
+    {"finanzas", "finance", "financiero", "financial"},
+    {"ventas", "sales", "comercial"},
+    {"marketing", "mercadeo"},
+    {"recursos humanos", "rrhh", "hr", "talento humano", "human resources"},
+    {"sistemas", "ti", "it", "tecnologia"},
+    {"proyectos", "project", "projects"},
+    {"producto", "product"},
+    {"calidad", "quality", "qa"},
+    {"soporte", "support", "help desk", "mesa de ayuda"},
+    {"operaciones", "operations"},
+    {"logistica", "logistics"},
+    {"compras", "procurement", "purchasing"},
+    {"diseñador", "designer"},
+    {"seguridad", "security"},
+    {"negocios", "business"},
+    {"procesos", "process", "processes"},
+    {"riesgos", "risk", "risks"},
+]
+_TITLE_STOPWORDS = {"de", "del", "la", "las", "el", "los", "y", "e", "en", "para", "con", "a", "o", "of", "the", "and", "in", "for", "to", "/", "-", "|"}
+_SYN_INDEX: dict[str, set[str]] = {}
+for _g in _SYNONYM_GROUPS:
+    _gn = {norm(w) for w in _g}
+    for _w in _gn:
+        _SYN_INDEX.setdefault(_w, set()).update(_gn)
+
+
+def _variants(word: str) -> set[str]:
+    """Singular/plural and masculine/feminine forms: analista(s), ingeniero(a)(s), datos/dato."""
+    out = {word}
+    if len(word) > 3:
+        if word.endswith("es"):
+            out.add(word[:-2])
+        if word.endswith("s"):
+            out.add(word[:-1])
+        else:
+            out.update({word + "s", word + "es"})
+        base = word[:-1] if word.endswith("s") else word
+        if base.endswith("o"):
+            out.update({base[:-1] + "a", base[:-1] + "as"})
+        if base.endswith("or"):
+            out.update({base + "a", base + "as"})
+    return out
+
+
+def _concept_terms(word: str) -> set[str]:
+    """All the ways a keyword word may appear in a title."""
+    terms: set[str] = set()
+    for v in _variants(word):
+        terms.update(_SYN_INDEX.get(v, {v}))
+    expanded: set[str] = set()
+    for t in terms:
+        expanded.update(_variants(t) if " " not in t else {t})
+    return expanded
+
+
+def keyword_concepts(keyword: str) -> list[set[str]]:
+    """Split a role ('Analista de datos') into the concepts a title must contain.
+    Known multi-word phrases ('recursos humanos', 'power bi') count as one concept."""
+    k = norm(keyword)
+    words = k.split()
+    concepts: list[set[str]] = []
+    i = 0
+    while i < len(words):
+        # longest known phrase starting here
+        for size in (3, 2):
+            phrase = " ".join(words[i:i + size])
+            if size > 1 and len(words) - i >= size and phrase in _SYN_INDEX:
+                concepts.append(set(_SYN_INDEX[phrase]))
+                i += size
+                break
+        else:
+            w = words[i]
+            i += 1
+            if w in _TITLE_STOPWORDS or not re.search(r"\w", w):
+                continue
+            concepts.append(_concept_terms(w))
+    return concepts
+
+
+def title_matches(title: str, keyword: str) -> bool:
+    """True when the title contains every concept of the keyword (or a synonym).
+    'Analista de datos' matches 'Data Analyst', 'Analista BI' and 'Analista de Datos Sr.',
+    but not 'Analista de Inteligencia Artificial' or 'Especialista de Pricing'."""
+    t = norm(title)
+    concepts = keyword_concepts(keyword)
+    if not concepts:
+        return False
+    return all(any(contains_term(t, term) for term in c) for c in concepts)
+
+
 # ---------- modality ----------
 _REMOTE = ["remoto", "remote", "teletrabajo", "home office", "trabajo desde casa", "100% remoto", "work from home"]
 _HYBRID = ["hibrido", "hybrid", "presencial y remoto", "semipresencial", "semi presencial", "mixto"]

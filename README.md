@@ -1,7 +1,7 @@
 # JobRadar — buscador de empleos en varios portales (Perú)
 
 Busca cientos de ofertas a la vez en **Indeed, LinkedIn, Computrabajo y Bumeran**. Las filtra según tus preferencias,
-elimina duplicados entre portales, las ordena por un **puntaje de relevancia (0-100)** y, si quieres, las compara con
+elimina duplicados entre portales, **solo muestra las ofertas cuyo cargo coincide con lo que buscas** (o un sinónimo), las ordena por relevancia y, si quieres, las compara con
 tu **CV usando IA** (Google Gemini, o Claude como alternativa).
 
 ## Arquitectura: sin base de datos
@@ -53,13 +53,15 @@ Para probar la imagen de producción:
    - **A. Qué buscar:** cargos, ciudad, modalidad, antigüedad, jornada y portales.
    - **B. Perfil:** nivel, salario mínimo (PEN o USD) y tus años de experiencia.
    - **C. Filtros finos:** palabras obligatorias, deseables y excluyentes, títulos a excluir, empresas bloqueadas e idioma.
-   - **D. Extras:** puntaje mínimo, solo nuevas y análisis con IA.
+   - **D. Extras:** ocultar ofertas ya vistas y análisis con IA.
    - Puedes guardar la combinación como perfil.
-2. **Resultados:** filtros rápidos; al abrir una oferta ves por qué obtuvo su puntaje, la descripción resaltada, los estados y tus notas. Desde aquí exportas a Excel o CSV.
+2. **Resultados:** filtros rápidos; al abrir una oferta ves por qué se muestra, la descripción resaltada, los estados y tus notas. Desde aquí exportas a Excel o CSV.
 3. **Mis ofertas:** tablero con tus postulaciones por estado.
 4. **Configuración:** CV, proveedor y modelo de IA, API key y borrado de datos.
 
-**Puntaje:** título (35) + palabras deseables (30) + modalidad (15) + salario (10) + recencia (10). Solo cuentan los criterios que llenaste.
+**Cargo estricto:** «Analista de datos» muestra «Data Analyst», «Analista BI» o «Analista de Datos Sr.», pero no «Analista de Inteligencia Artificial». Marca *Incluir también cargos parecidos* si quieres más resultados.
+
+**Orden:** primero las que coinciden con el cargo y mencionan tus palabras deseables, luego modalidad, salario y fecha.
 
 ## IA: tu API key de Gemini
 1. Entra a https://aistudio.google.com/apikey y haz clic en **Create API key**. Empieza con `AIza`.
@@ -79,7 +81,7 @@ para mejorar sus productos.
 ## Tests
 ```
 pip install -r requirements-dev.txt
-python -m pytest -q                  # 62 pruebas offline (incluye pruebas de seguridad)
+python -m pytest -q                  # 65 pruebas offline (incluye pruebas de seguridad)
 python -m tests.live.smoke_sources   # prueba en vivo contra los portales
 ```
 Herramienta de uso personal: usa frecuencias moderadas y respeta los términos de cada portal.

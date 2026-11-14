@@ -41,7 +41,9 @@
       <section class="card">
         <h2><span class="step">A</span> Qué buscar</h2>
         <label>Cargos o palabras clave <em>separados por coma (máx. 5); cada uno se busca por separado</em></label>
-        <textarea rows="2" x-model="form.keywordsText" placeholder="Analista de datos, Data Analyst, Analista BI" required></textarea>
+        <textarea rows="2" x-model="form.keywordsText" placeholder="Analista de datos, Analista BI" required></textarea>
+        <label class="inline"><input type="checkbox" x-model="form.similar_titles"> Incluir también cargos parecidos <em>más resultados, pero menos precisos</em></label>
+        <p class="hint" x-show="!form.similar_titles">Solo verás ofertas cuyo cargo contiene lo que escribiste o un sinónimo. Ejemplo: «Analista de datos» incluye «Data Analyst» y «Analista BI».</p>
         <div class="row">
           <div><label>Ciudad / región</label><input type="text" x-model="form.location" placeholder="Lima"></div>
           <div><label>Antigüedad máxima</label>
@@ -93,7 +95,7 @@
         <h2 class="mt"><span class="step">C</span> Filtros finos</h2>
         <label>Palabras obligatorias <em>deben aparecer todas</em></label>
         <input type="text" x-model="form.must_haveText" placeholder="SQL">
-        <label>Palabras deseables <em>suben el puntaje</em></label>
+        <label>Palabras deseables <em>las ofertas que las mencionan salen primero</em></label>
         <input type="text" x-model="form.nice_to_haveText" placeholder="Power BI, Python, inglés">
         <label>Palabras excluyentes <em>en título o descripción</em></label>
         <input type="text" x-model="form.excludeText" placeholder="ventas, call center, comisiones">
@@ -109,10 +111,8 @@
       </section>
 
       <section class="card">
-        <h2><span class="step">D</span> Puntaje y extras</h2>
-        <label>Puntaje mínimo: <strong x-text="form.min_score"></strong></label>
-        <input type="range" min="0" max="90" step="5" x-model.number="form.min_score">
-        <label class="inline"><input type="checkbox" x-model="form.only_new"> Mostrar solo ofertas nuevas (no vistas antes)</label>
+        <h2><span class="step">D</span> Extras</h2>
+        <label class="inline"><input type="checkbox" x-model="form.only_new"> Ocultar las ofertas que ya vi en búsquedas anteriores</label>
         <label class="inline"><input type="checkbox" x-model="form.ai_match" :disabled="!canUseAI()">
           Analizar afinidad con mi CV usando IA</label>
         <p class="hint" x-show="!canUseAI()">Para usar IA, sube tu CV y tu API key en <a href="#" @click.prevent="tab='config'">Configuración</a>.</p>
@@ -160,7 +160,7 @@
         <p x-show="!runId">Aún no hay resultados. Haz una búsqueda en la pestaña <a href="#" @click.prevent="tab='buscar'">Buscar</a>.</p>
         <p x-show="runId">Esta búsqueda no tiene ofertas que pasen tus filtros. Revisa el resumen y ajusta los filtros.</p>
         <div x-show="summary?.rejected && Object.keys(summary.rejected).length" class="rejected">
-          <h3>Ofertas descartadas por filtros</h3>
+          <h3>¿Por qué no aparecen otras ofertas?</h3>
           <template x-for="(n, why) in summary?.rejected || {}"><div><span x-text="why"></span>: <strong x-text="n"></strong></div></template>
         </div>
       </div>
@@ -171,14 +171,15 @@
       <aside class="filters card">
         <div class="summary">
           <div><strong x-text="filtered.length"></strong> de <span x-text="results.length"></span> ofertas</div>
-          <small x-show="summary">Descargadas <span x-text="summary?.fetched"></span> · duplicadas <span x-text="summary?.duplicates"></span> · nuevas <span x-text="summary?.new"></span></small>
+          <small x-show="summary">Revisamos <span x-text="summary?.fetched"></span> ofertas de los portales y te mostramos las que coinciden con tu búsqueda.</small>
         </div>
+        <p class="notice" x-show="summary?.rejected?.['Ya vista en búsquedas anteriores']">
+          Se ocultaron <strong x-text="summary?.rejected?.['Ya vista en búsquedas anteriores']"></strong> ofertas que ya habías visto antes.
+          <a href="#" @click.prevent="showSeen()">Mostrarlas</a></p>
         <label>Buscar en resultados</label>
         <input type="search" x-model="qf.text" placeholder="texto, empresa…">
-        <label>Puntaje mínimo: <strong x-text="qf.minScore"></strong></label>
-        <input type="range" min="0" max="100" step="5" x-model.number="qf.minScore">
         <label>Ordenar por</label>
-        <select x-model="qf.sort"><option value="score">Puntaje</option><option value="ai">Afinidad IA</option><option value="date">Más recientes</option><option value="salary">Salario</option></select>
+        <select x-model="qf.sort"><option value="score">Más relevantes</option><option value="ai">Afinidad con mi CV (IA)</option><option value="date">Más recientes</option><option value="salary">Salario</option></select>
         <label>Portal</label>
         <div class="chips small">
           <template x-for="s in resultSources"><button type="button" class="chip" :class="{on: qf.sources.includes(s)}" @click="toggle(qf.sources, s)" x-text="sourceLabel(s)"></button></template>
@@ -200,7 +201,7 @@
           <button class="btn ghost" @click="runAI()" :disabled="aiRunning" x-text="aiRunning ? 'Analizando con IA…' : 'Analizar top con IA'"></button>
         </div>
         <details x-show="summary?.rejected && Object.keys(summary.rejected).length" class="rejected">
-          <summary>Descartadas por filtros</summary>
+          <summary>¿Por qué no aparecen otras ofertas?</summary>
           <template x-for="(n, why) in summary?.rejected || {}"><div><span x-text="why"></span>: <strong x-text="n"></strong></div></template>
         </details>
       </aside>
@@ -208,7 +209,6 @@
       <section class="list">
         <template x-for="j in filtered" :key="j.id">
           <article class="job card" :class="{selected: sel && sel.id===j.id, discarded: j.status==='descartada'}" @click="select(j)">
-            <div class="score" :class="scoreClass(j.score)" x-text="j.score"></div>
             <div class="jmain">
               <div class="jtitle"><span x-text="j.title"></span> <span class="tag new" x-show="j.is_new">nueva</span></div>
               <div class="jmeta">
@@ -221,7 +221,7 @@
                 <span class="tag" x-show="j.level" x-text="labels.level[j.level]"></span>
                 <span class="tag money" x-show="salaryText(j)" x-text="salaryText(j)"></span>
                 <span class="tag" x-show="j.date_posted" x-text="ago(j.date_posted)"></span>
-                <span class="tag ai" x-show="j.ai_score != null" x-text="'IA ' + j.ai_score"></span>
+                <span class="tag ai" x-show="j.ai_score != null" x-text="'Afinidad ' + affinity(j.ai_score)"></span>
                 <span class="tag status" x-show="j.status!=='nueva'" :class="j.status" x-text="labels.status[j.status]"></span>
               </div>
             </div>
@@ -240,11 +240,11 @@
             </div>
             <a class="btn primary" :href="safeUrl(sel.url)" target="_blank" rel="noopener noreferrer">Ver oferta y postular ↗</a>
             <div class="why">
-              <h3>Puntaje <span x-text="sel.score"></span>/100</h3>
+              <h3>Por qué te la mostramos</h3>
               <ul><template x-for="r in sel.reasons"><li x-text="r"></li></template></ul>
             </div>
             <div class="ai-box" x-show="sel.ai">
-              <h3>Afinidad con tu CV: <span x-text="sel.ai?.score"></span>/100</h3>
+              <h3>Afinidad con tu CV: <span x-text="affinity(sel.ai?.score)"></span></h3>
               <div class="cols">
                 <div><h4>Fortalezas</h4><ul><template x-for="s in sel.ai?.strengths || []"><li x-text="s"></li></template></ul></div>
                 <div><h4>Brechas</h4><ul><template x-for="s in sel.ai?.gaps || []"><li x-text="s"></li></template></ul></div>
@@ -317,7 +317,7 @@
         <select x-model="cfg.ai_model">
           <template x-for="(lbl, id) in (meta.ai_providers[cfg.ai_provider]?.models || {})"><option :value="id" x-text="lbl" :selected="id===cfg.ai_model"></option></template>
         </select>
-        <label>Ofertas a analizar por búsqueda (las de mayor puntaje)</label>
+        <label>Ofertas a analizar por búsqueda (las más relevantes)</label>
         <input type="number" min="5" :max="meta.limits.max_ai_jobs || 50" x-model.number="cfg.ai_top_n">
         <div class="actions">
           <button class="btn primary" @click="saveSettings()">Guardar</button>

@@ -64,7 +64,7 @@ def test_must_have_without_description_is_kept():
 
 
 def test_level_and_language():
-    assert check(job(title="Jefe de Analítica"), levels=["junior", "semi-senior"]) == "Nivel jefatura"
+    assert check(job(title="Jefe de Analistas de Datos"), levels=["junior", "semi-senior"]) == "Nivel jefatura"
     en = job(description="We are looking for a data analyst with experience in SQL and you will work with our team. " * 3)
     assert check(en, languages=["es"]) == "Idioma en"
 
@@ -78,7 +78,7 @@ def test_score_ranks_better_matches_higher():
     sg, rg = score(good, p)
     sw, _ = score(weak, p)
     assert sg >= 90 and sw < 40 and sg > sw
-    assert any("Deseables" in r for r in rg)
+    assert any("Menciona" in r for r in rg) and any("cargo coincide" in r for r in rg)
 
 
 def test_dedupe_merges_across_portals():
@@ -94,8 +94,36 @@ def test_dedupe_merges_across_portals():
 def test_process_pipeline_counts():
     p = SearchParams(keywords=["analista de datos"], exclude="ventas", min_score=10)
     jobs = [job(eid=str(i), title=f"Analista de Datos {i}", company=f"C{i}") for i in range(5)]
-    jobs.append(job(eid="v", title="Analista de ventas", company="V", description="Ventas y comisiones " * 10))
+    jobs.append(job(eid="v", title="Analista de datos comerciales", company="V", description="Ventas y comisiones " * 10))
+    jobs.append(job(eid="g", title="Analista de Inteligencia Artificial Generativa", company="G"))
     kept, rejected, dupes = process(jobs, p)
     assert len(kept) == 5 and dupes == 0
     assert rejected["Contiene 'ventas'"] == 1
+    assert rejected["El cargo no coincide con lo buscado"] == 1
     assert kept == sorted(kept, key=lambda e: e.score, reverse=True)
+
+
+def test_title_must_match_role_or_synonym():
+    from app.engine.text import title_matches
+    kw = "Analista de datos"
+    for t in ["Analista de Datos", "Data Analyst", "Analista BI Semi Senior – Power BI", "ANALISTA SR. DE DATA ANALYTICS",
+              "Analistas de datos", "Analista de Datos BI (Power BI)"]:
+        assert title_matches(t, kw), t
+    for t in ["Analista de Inteligencia Artificial Generativa", "Especialista de Analítica de Talento",
+              "Especialista de Pricing", "Analista de Inteligencia Comercial", "Asistente Administrativo"]:
+        assert not title_matches(t, kw), t
+    assert title_matches("Ingeniera de Software", "Ingeniero de software")
+    assert title_matches("HR Business Partner", "Recursos Humanos")
+    assert title_matches("Desarrolladora Python", "desarrollador python")
+
+
+def test_similar_titles_option_relaxes_the_title_filter():
+    off_topic = job(title="Analista de Inteligencia Artificial Generativa")
+    assert check(off_topic) == "El cargo no coincide con lo buscado"
+    assert check(off_topic, similar_titles=True) is None
+
+
+def test_dedupe_company_name_variants():
+    a = enrich(job(eid="1", source="computrabajo", company="Laureate", title="UPC Remoto: Analista de Datos"), "PEN")
+    b = enrich(job(eid="2", source="bumeran", company="Laureate Perú", title="UPC Remoto: Analista de Datos"), "PEN")
+    assert len(dedupe([a, b])) == 1

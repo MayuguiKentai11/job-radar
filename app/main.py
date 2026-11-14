@@ -334,9 +334,9 @@ class ExportIn(BaseModel):
 
 
 EXPORT_COLS = [
-    ("score", "Puntaje"), ("ai_score", "Afinidad IA"), ("title", "Puesto"), ("company", "Empresa"), ("location", "Ubicación"),
+    ("title", "Puesto"), ("ai_affinity", "Afinidad con CV (IA)"), ("company", "Empresa"), ("location", "Ubicación"),
     ("modality", "Modalidad"), ("level", "Nivel"), ("salary", "Salario"), ("date_posted", "Publicada"), ("source", "Portal"),
-    ("status", "Estado"), ("required_years", "Años pedidos"), ("reasons", "Motivos"), ("notes", "Notas"), ("url", "Enlace"),
+    ("status", "Estado"), ("required_years", "Años pedidos"), ("reasons", "Por qué se muestra"), ("notes", "Notas"), ("url", "Enlace"),
 ]
 
 
@@ -357,6 +357,8 @@ def _export_values(r: ExportRow) -> list:
         sal = f"{r.salary_currency or 'PEN'} {amounts}{per}"
     d["salary"] = sal
     d["reasons"] = "; ".join(r.reasons)
+    s = r.ai_score
+    d["ai_affinity"] = None if s is None else ("Alta" if s >= 75 else "Media" if s >= 50 else "Baja")
     d["url"] = security.safe_url(r.url) or ""
     return [_cell(d.get(k)) if d.get(k) is not None else "" for k, _ in EXPORT_COLS]
 
