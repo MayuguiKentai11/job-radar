@@ -63,12 +63,11 @@
         </div>
         <label>Portales</label>
         <div class="sources">
-          <template x-for="s in meta.sources" :key="s.key">
+          <template x-for="s in usableSources" :key="s.key">
             <label class="source" :class="{disabled: sourceOff(s)}" :title="sourceOff(s)">
               <input type="checkbox" :disabled="!!sourceOff(s)" :checked="form.sources.includes(s.key)" @change="toggle(form.sources, s.key)">
               <span x-text="s.label"></span>
               <small x-show="s.experimental && !s.unavailable" class="tag warn">experimental</small>
-              <small x-show="s.unavailable" class="tag muted">no disponible</small>
               <a href="#" x-show="!s.unavailable && sourceOff(s)" class="tag warn" @click.prevent="tab='config'">requiere key</a>
               <small x-show="s.key==='google'" class="muted-note">incluye ofertas de LinkedIn y Bumeran</small>
             </label>

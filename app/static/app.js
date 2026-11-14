@@ -113,6 +113,8 @@ window.jobradar = function () {
 
     notify(msg) { this.toast = msg; clearTimeout(this._t); this._t = setTimeout(() => (this.toast = ""), 4000); },
     toggle(arr, v) { const i = arr.indexOf(v); i >= 0 ? arr.splice(i, 1) : arr.push(v); },
+    // portals that cannot run in this deployment (blocked or unsupported) are not shown at all
+    get usableSources() { return (this.meta.sources || []).filter(s => !s.unavailable); },
     portalText(j) { return this.sourceLabel(j.source) + (j.via_google ? " (vía Google)" : j.via ? " · vía " + j.via : ""); },
     sourceLabel(k) { return (this.meta.sources.find(s => s.key === k) || {}).label || k; },
     affinity(s) { return s == null ? "" : s >= 75 ? "alta" : s >= 50 ? "media" : "baja"; },
@@ -255,6 +257,8 @@ window.jobradar = function () {
     async startSearch() {
       if (this.searching) return;
       const params = formToParams(this.form);
+      params.sources = (params.sources || []).filter(k => this.usableSources.some(s => s.key === k && !this.sourceOff(s)));
+      if (!params.sources.length) return this.notify("Selecciona al menos un portal");
       this.searching = true;
       this.status = { phase: "buscando", sources: Object.fromEntries((params.sources || []).map(k => [k, { status: "pendiente", count: 0, message: "" }])), error: null };
       try {

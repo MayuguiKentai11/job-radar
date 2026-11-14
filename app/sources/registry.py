@@ -12,6 +12,5 @@ SOURCES: dict[str, Source] = {
         ComputrabajoSource(),
         BumeranSource(),
         SerpApiJobsSource(),
-        JobSpySource("glassdoor", "Glassdoor"),
     ]
 }

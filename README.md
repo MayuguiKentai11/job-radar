@@ -77,7 +77,7 @@ para mejorar sus productos.
 | Indeed, Computrabajo | ✅ | ✅ |
 | LinkedIn, Bumeran | ✅ | ❌ bloquean las IPs de servidores en la nube (desactivados con `DISABLED_SOURCES`) |
 | Google Jobs (vía SerpApi) | ✅ con tu key | ✅ con tu key: también trae ofertas publicadas en LinkedIn, Bumeran y webs de empresas |
-| Glassdoor | ❌ sin sitio para Perú | ❌ |
+
 
 Al hacer clic en el logo **JobRadar** vuelves al buscador limpio.
 
