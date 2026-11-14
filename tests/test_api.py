@@ -314,3 +314,17 @@ def test_meta_and_health(client):
     assert "gemini" in m["ai_providers"] and m["limits"]["max_keywords"] == 5
     assert "env" not in m["ai_providers"]["gemini"]
     assert client.get("/healthz").json() == {"ok": True}
+
+
+def test_disabled_sources_are_reported_not_searched(monkeypatch):
+    from app import config
+    from app.engine.params import SearchParams
+    from app.engine.search import run_source
+    from app.sources.registry import SOURCES
+
+    monkeypatch.setattr(config, "DISABLED_SOURCES", {"bumeran"})
+    events = []
+    assert run_source("bumeran", SearchParams(keywords=["x"]), events.append) == []
+    assert events[-1]["status"] == "no_disponible" and "run.bat" in events[-1]["message"]
+    assert SOURCES["bumeran"].unavailable("peru") == config.DISABLED_SOURCE_MSG
+    assert SOURCES["indeed"].unavailable("peru") is None

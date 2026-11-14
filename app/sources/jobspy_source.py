@@ -43,6 +43,8 @@ class JobSpySource(Source):
         self.experimental = experimental
 
     def availability(self, country: str):
+        if self.key == "google":
+            return "Google bloquea las búsquedas automáticas de empleos, así que este portal está desactivado."
         if self.key == "glassdoor":
             from jobspy.glassdoor.constant import domains
 

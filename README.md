@@ -72,16 +72,19 @@ reintenta automáticamente. Aviso: en el plan gratuito de Gemini, Google puede u
 para mejorar sus productos.
 
 ## Portales
-| Portal | Estado |
-|---|---|
-| Indeed, LinkedIn, Computrabajo, Bumeran | ✅ (LinkedIn es el más lento) |
-| Google Jobs | ⚠ experimental: Google bloquea consultas automáticas |
-| Glassdoor | ❌ sin sitio para Perú |
+| Portal | En tu PC (`run.bat`) | En Render |
+|---|---|---|
+| Indeed, Computrabajo | ✅ | ✅ |
+| LinkedIn, Bumeran | ✅ | ❌ bloquean las IPs de servidores en la nube (desactivados con `DISABLED_SOURCES`) |
+| Google Jobs | ❌ Google bloquea las búsquedas automáticas | ❌ |
+| Glassdoor | ❌ sin sitio para Perú | ❌ |
+
+Al hacer clic en el logo **JobRadar** vuelves al buscador limpio.
 
 ## Tests
 ```
 pip install -r requirements-dev.txt
-python -m pytest -q                  # 65 pruebas offline (incluye pruebas de seguridad)
+python -m pytest -q                  # 66 pruebas offline (incluye pruebas de seguridad)
 python -m tests.live.smoke_sources   # prueba en vivo contra los portales
 ```
 Herramienta de uso personal: usa frecuencias moderadas y respeta los términos de cada portal.

@@ -14,3 +14,5 @@ services:
         generateValue: true
       - key: APP_PASSWORD    # you choose it in the Render dashboard (>= 12 chars)
         sync: false
+      - key: DISABLED_SOURCES  # these portals block requests from cloud servers; they work from your PC (run.bat)
+        value: linkedin,bumeran

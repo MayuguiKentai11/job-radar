@@ -12,7 +12,7 @@
 <div x-data="jobradar()" x-init="init()" class="app" x-cloak>
 
   <header class="topbar">
-    <div class="brand"><span class="logo">◎</span> JobRadar <small>Perú</small></div>
+    <a href="/" class="brand" @click.prevent="newSearch()" title="Nueva búsqueda"><span class="logo" aria-hidden="true">◎</span> JobRadar <small>Perú</small></a>
     <nav class="tabs">
       <button :class="{active: tab==='buscar'}" @click="tab='buscar'">Buscar</button>
       <button :class="{active: tab==='resultados'}" @click="tab='resultados'">Resultados <span class="pill" x-show="results.length" x-text="results.length"></span></button>
@@ -67,7 +67,7 @@
             <label class="source" :class="{disabled: s.unavailable}" :title="s.unavailable || ''">
               <input type="checkbox" :disabled="!!s.unavailable" :checked="form.sources.includes(s.key)" @change="toggle(form.sources, s.key)">
               <span x-text="s.label"></span>
-              <small x-show="s.experimental" class="tag warn">experimental</small>
+              <small x-show="s.experimental && !s.unavailable" class="tag warn">experimental</small>
               <small x-show="s.unavailable" class="tag muted">no disponible</small>
             </label>
           </template>

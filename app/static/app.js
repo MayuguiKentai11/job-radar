@@ -189,6 +189,15 @@ window.jobradar = function () {
     async logout() { try { await api("/api/logout", { method: "POST" }); } catch (_) { /* */ } window.location.href = "/login"; },
 
     // ---------- profiles (browser) ----------
+    newSearch() {
+      // logo click: back to a clean search form (saved data, history and results are kept)
+      this.profileId = ""; this.profileName = "";
+      this.form = emptyForm(this.meta.defaults);
+      this.form.sources = this.meta.defaults.sources.filter(k => !this.meta.sources.find(s => s.key === k)?.unavailable);
+      if (!this.searching) this.status = null;
+      this.sel = null; this.tab = "buscar";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
     loadProfile() {
       const pr = this.profiles.find(p => String(p.id) === String(this.profileId));
       if (!pr) { this.form = emptyForm(this.meta.defaults); this.profileName = ""; return; }

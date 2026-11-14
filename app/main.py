@@ -113,7 +113,7 @@ auth = Depends(security.require_auth)
 def meta(country: str = "peru"):
     return {
         "sources": [
-            {"key": s.key, "label": s.label, "experimental": s.experimental, "unavailable": s.availability(country)}
+            {"key": s.key, "label": s.label, "experimental": s.experimental, "unavailable": s.unavailable(country)}
             for s in SOURCES.values()
         ],
         "modalities": MODALITIES, "levels": LEVELS, "job_types": JOB_TYPES,

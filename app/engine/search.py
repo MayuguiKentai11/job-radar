@@ -32,7 +32,7 @@ def run_source(key: str, p: SearchParams, emit, sources=None) -> list[JobPosting
     if src is None:
         status("error", 0, "Portal desconocido")
         return []
-    msg = src.availability(p.country)
+    msg = src.unavailable(p.country)
     if msg:
         status("no_disponible", 0, msg)
         return []

@@ -66,5 +66,13 @@ class Source:
         """Return a human message if the source cannot run for this country."""
         return None
 
+    def unavailable(self, country: str) -> Optional[str]:
+        """availability() plus portals disabled for this deployment (DISABLED_SOURCES)."""
+        from app import config
+
+        if self.key in config.DISABLED_SOURCES:
+            return config.DISABLED_SOURCE_MSG
+        return self.availability(country)
+
     def search(self, q: SourceQuery, progress: ProgressCb) -> list[JobPosting]:
         raise NotImplementedError
