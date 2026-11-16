@@ -171,3 +171,145 @@ mark.bad { background: var(--bad-soft); color: var(--bad); padding: 0 2px; borde
 .login-card h1 { font-size: 20px; margin: 0 0 4px; display: flex; gap: 8px; align-items: center; }
 
 .muted-note { color: var(--muted); font-size: 11.5px; }
+
+/* ================= UX: focus, motion, feedback (global) ================= */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn, .chip, .tabs button, .link-btn, .source { transition: background-color .15s ease, border-color .15s ease, color .15s ease, transform .1s ease, opacity .15s ease; }
+.btn:active:not(:disabled), .chip:active { transform: scale(.97); }
+.btn.ghost:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.btn.ghost.danger:hover:not(:disabled) { border-color: var(--bad); color: var(--bad); }
+.btn.primary:hover:not(:disabled) { filter: brightness(1.08); }
+.btn:disabled { cursor: not-allowed; opacity: .6; }
+.btn.primary:disabled { cursor: progress; }
+.chip:hover:not(.on) { border-color: var(--accent); color: var(--accent); }
+.source:hover:not(.disabled) { border-color: var(--accent); }
+.source:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.tabs .logout { color: var(--muted); }
+.tabs .logout:hover { background: var(--bad-soft); color: var(--bad); }
+.job:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.job:hover .jtitle { color: var(--accent); }
+.kcard { transition: border-color .15s ease; }
+.kcard:hover { border-color: var(--accent); }
+.kanban .col h3 { margin-top: 0; display: flex; align-items: center; gap: 6px; }
+.empty-hero { text-align: center; padding: 36px 16px; margin-bottom: 14px; }
+.empty-hero .big-emoji { font-size: 38px; display: block; margin-bottom: 6px; }
+.empty-hero p { max-width: 460px; margin: 6px auto; }
+.toast { animation: toast-in .2s ease-out; }
+@keyframes toast-in { from { opacity: 0; transform: translate(-50%, 8px); } }
+.spinner { display: none; width: 15px; height: 15px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .7s linear infinite; }
+.loading .spinner { display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.detail-backdrop { display: none; }
+@media (max-width: 1200px) {
+  .detail-backdrop { display: block; position: fixed; inset: 0; background: rgba(15, 20, 32, .45); z-index: 29; animation: fade-in .15s ease-out; }
+  .detail { animation: slide-in .2s ease-out; }
+}
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes slide-in { from { transform: translateX(24px); opacity: .6; } }
+@media (max-width: 760px) {
+  .tabs { flex-wrap: nowrap; overflow-x: auto; width: 100%; scrollbar-width: none; }
+  .tabs button { flex: none; }
+  .btn, .chip { min-height: 38px; }
+}
+
+/* ================= LOGIN + PENGUIN ================= */
+.login-body { background: radial-gradient(1200px 500px at 50% -10%, var(--accent-soft), transparent 70%), var(--bg); min-height: 100vh; }
+.login-card { width: min(400px, 100%); padding: 22px 24px 20px; position: relative; }
+.login-card .hint { margin: 0 0 4px; }
+.pw-field { position: relative; }
+.pw-field input { padding-right: 86px; height: 42px; font-size: 15px; }
+.pw-toggle { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); border: 0; background: transparent; color: var(--accent);
+  font: inherit; font-weight: 600; font-size: 12.5px; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
+.pw-toggle:hover { background: var(--accent-soft); }
+.caps-warn { margin: 6px 0 0; font-size: 12.5px; color: var(--warn); }
+.login-card .error { min-height: 1.2em; margin: 10px 0 0; text-align: center; }
+
+.penguin-stage { display: flex; flex-direction: column; align-items: center; margin: -4px 0 6px; cursor: pointer; user-select: none; }
+.penguin { width: 132px; height: auto; overflow: visible; }
+.penguin-bubble { position: relative; margin: 0 0 6px; padding: 6px 12px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border);
+  font-size: 13px; font-weight: 600; text-align: center; max-width: 100%; }
+.penguin-bubble::after { content: ""; position: absolute; left: 50%; bottom: -6px; width: 10px; height: 10px; background: var(--surface-2);
+  border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transform: translateX(-50%) rotate(45deg); }
+.penguin-bubble.pop { animation: bubble-pop .28s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes bubble-pop { from { transform: scale(.85); opacity: .3; } }
+
+/* pieces (SVG transform origins are in viewBox units) */
+.penguin .pg-all { transform-origin: 80px 158px; transition: transform .3s ease; }
+.penguin .pg-shadow { fill: var(--border); }
+.penguin .pg-flip { transition: transform .38s cubic-bezier(.34, 1.4, .64, 1); }
+.penguin .pg-flip-l { transform-origin: 34px 84px; transform: rotate(8deg); }
+.penguin .pg-flip-r { transform-origin: 126px 84px; transform: rotate(-8deg); }
+.penguin .pg-eyes { transform-origin: 80px 58px; transition: transform .2s ease; }
+.penguin .pg-pupil { transition: transform .12s ease-out; }
+.penguin .pg-eye-r { transform-origin: 92px 58px; transition: transform .25s cubic-bezier(.34, 1.56, .64, 1); }
+.penguin .pg-brows path { transition: transform .25s ease; }
+.penguin .pg-brow-l { transform-origin: 67px 44px; }
+.penguin .pg-brow-r { transform-origin: 93px 44px; }
+.penguin .pg-mouth { transform-origin: 80px 82px; transition: transform .25s ease; }
+.penguin .pg-blush { opacity: 0; transition: opacity .3s ease; }
+.penguin .pg-sweat { opacity: 0; transition: opacity .2s ease; }
+.penguin .pg-tuft { transform-origin: 84px 22px; }
+
+/* idle: gentle waddle, blinking, wiggling hair tuft */
+.penguin[data-mood="idle"] .pg-all { animation: pg-sway 2.6s ease-in-out infinite; }
+.penguin[data-mood="idle"] .pg-eyes { animation: pg-blink 4.2s infinite; }
+.penguin[data-mood="idle"] .pg-tuft { animation: pg-tuft 2.6s ease-in-out infinite; }
+.penguin[data-mood="idle"] .pg-flip-l { animation: pg-flap-l 2.6s ease-in-out infinite; }
+.penguin[data-mood="idle"] .pg-flip-r { animation: pg-flap-r 2.6s ease-in-out infinite; }
+
+/* cover: both flippers over the eyes */
+.penguin[data-mood="cover"] .pg-flip-l { transform: translate(50.8px, -11.5px) rotate(120deg); }
+.penguin[data-mood="cover"] .pg-flip-r { transform: translate(-50.8px, -11.5px) rotate(-120deg); }
+.penguin[data-mood="cover"] .pg-blush { opacity: .55; }
+.penguin[data-mood="cover"] .pg-eyes { transform: scaleY(.15); }
+
+/* peek: one flipper drops, the right eye pops wide open */
+.penguin[data-mood="peek"] .pg-flip-l { transform: translate(50.8px, -11.5px) rotate(120deg); }
+.penguin[data-mood="peek"] .pg-flip-r { transform: translate(-48.9px, 4.1px) rotate(-100deg); }
+.penguin[data-mood="peek"] .pg-eye-r { transform: scale(1.35); }
+.penguin[data-mood="peek"] .pg-brow-r { transform: translateY(-6px) rotate(-8deg); }
+.penguin[data-mood="peek"] .pg-blush { opacity: .9; }
+.penguin[data-mood="peek"] .pg-mouth { transform: scale(.6, 1.6); }
+.penguin[data-mood="peek"] .pg-eye-r .pg-pupil { animation: pg-dart 1.6s ease-in-out infinite; }
+
+/* error: head shake, frown, sweat drop */
+.penguin[data-mood="error"] .pg-all { animation: pg-shake .55s ease-in-out; }
+.penguin[data-mood="error"] .pg-mouth { transform: scaleY(-1); }
+.penguin[data-mood="error"] .pg-brow-l { transform: rotate(14deg) translateY(2px); }
+.penguin[data-mood="error"] .pg-brow-r { transform: rotate(-14deg) translateY(2px); }
+.penguin[data-mood="error"] .pg-sweat { opacity: 1; }
+.penguin[data-mood="error"] .pg-flip-l { transform: rotate(18deg); }
+.penguin[data-mood="error"] .pg-flip-r { transform: rotate(-18deg); }
+
+/* happy: jump with both flippers up */
+.penguin[data-mood="happy"] .pg-all { animation: pg-jump .5s cubic-bezier(.34, 1.56, .64, 1) 2; }
+.penguin[data-mood="happy"] .pg-flip-l { transform: rotate(150deg); }
+.penguin[data-mood="happy"] .pg-flip-r { transform: rotate(-150deg); }
+.penguin[data-mood="happy"] .pg-mouth { transform: scale(1.4, 1.8); }
+.penguin[data-mood="happy"] .pg-blush { opacity: .8; }
+
+/* one-shot reactions */
+.penguin.giggle { animation: pg-giggle .22s ease-out; }
+.penguin.wave .pg-flip-r { animation: pg-wave .9s ease-in-out; }
+
+@keyframes pg-sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+@keyframes pg-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
+@keyframes pg-tuft { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(12deg); } }
+@keyframes pg-flap-l { 0%, 100% { transform: rotate(8deg); } 50% { transform: rotate(22deg); } }
+@keyframes pg-flap-r { 0%, 100% { transform: rotate(-22deg); } 50% { transform: rotate(-8deg); } }
+@keyframes pg-dart { 0%, 100% { transform: translateX(-2.5px); } 50% { transform: translateX(2.5px); } }
+@keyframes pg-shake { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(-8deg); } 40% { transform: rotate(7deg); } 60% { transform: rotate(-5deg); } 80% { transform: rotate(3deg); } }
+@keyframes pg-jump { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-16px) scale(1.03, .97); } }
+@keyframes pg-giggle { 50% { transform: translateY(-3px) rotate(-1.5deg); } }
+@keyframes pg-wave { 0%, 100% { transform: rotate(-150deg); } 25%, 75% { transform: rotate(-115deg); } 50% { transform: rotate(-150deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+.empty .big-emoji { font-size: 38px; display: block; margin-bottom: 6px; }
+.empty .empty-title { justify-content: center; }
+.empty .hint { max-width: 440px; margin: 6px auto 14px; }
+.empty .big-emoji { font-size: 38px; display: block; margin-bottom: 6px; }
+.empty .empty-title { justify-content: center; }
+.empty .hint { max-width: 440px; margin: 6px auto 14px; }
+.empty-hero h2 { justify-content: center; }

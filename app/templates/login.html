@@ -8,14 +8,72 @@
   <link rel="stylesheet" href="/static/styles.css">
   <script defer src="/static/login.js"></script>
 </head>
-<body>
+<body class="login-body">
   <main class="login-wrap">
-    <form id="login" class="card login-card" autocomplete="on">
-      <h1><span class="logo">◎</span> JobRadar</h1>
+    <form id="login" class="card login-card" autocomplete="on" novalidate>
+
+      <!-- Pingüino animado (SVG original, sin imágenes externas: la CSP solo permite 'self').
+           Estados (data-mood): idle · cover (escribe con la contraseña oculta) · peek (contraseña visible)
+           · error · happy. Decorativo: los lectores de pantalla lo ignoran. -->
+      <div class="penguin-stage" aria-hidden="true">
+        <p class="penguin-bubble" id="bubble">¡Hola! Soy Pingu, el guardián.</p>
+        <svg id="penguin" class="penguin" data-mood="idle" viewBox="0 0 160 170" focusable="false">
+          <ellipse class="pg-shadow" cx="80" cy="162" rx="44" ry="6"/>
+          <g class="pg-all">
+            <g class="pg-feet">
+              <ellipse class="pg-foot pg-foot-l" cx="62" cy="152" rx="15" ry="7" fill="#f59e0b"/>
+              <ellipse class="pg-foot pg-foot-r" cx="98" cy="152" rx="15" ry="7" fill="#f59e0b"/>
+            </g>
+            <g class="pg-body">
+              <path class="pg-tuft" d="M80 22 q-4 -14 6 -16 q-8 6 -2 14 q2 -10 10 -10 q-8 4 -6 12z" fill="#1f2937"/>
+              <ellipse cx="80" cy="92" rx="50" ry="62" fill="#1f2937"/>
+              <ellipse cx="80" cy="104" rx="36" ry="46" fill="#f8fafc"/>
+              <path d="M50 62 q0 -26 30 -26 q30 0 30 26 q0 20 -30 22 q-30 -2 -30 -22z" fill="#f8fafc"/>
+              <g class="pg-blush">
+                <ellipse cx="56" cy="74" rx="7" ry="4" fill="#fb7185"/>
+                <ellipse cx="104" cy="74" rx="7" ry="4" fill="#fb7185"/>
+              </g>
+              <g class="pg-brows">
+                <path class="pg-brow-l" d="M60 46 q8 -5 15 0" stroke="#1f2937" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path class="pg-brow-r" d="M85 46 q7 -5 15 0" stroke="#1f2937" stroke-width="3" fill="none" stroke-linecap="round"/>
+              </g>
+              <g class="pg-eyes">
+                <g class="pg-eye pg-eye-l">
+                  <circle cx="68" cy="58" r="9" fill="#fff" stroke="#1f2937" stroke-width="1.5"/>
+                  <circle class="pg-pupil" cx="68" cy="59" r="4.5" fill="#111827"/>
+                  <circle class="pg-shine" cx="70" cy="56.5" r="1.4" fill="#fff"/>
+                </g>
+                <g class="pg-eye pg-eye-r">
+                  <circle cx="92" cy="58" r="9" fill="#fff" stroke="#1f2937" stroke-width="1.5"/>
+                  <circle class="pg-pupil" cx="92" cy="59" r="4.5" fill="#111827"/>
+                  <circle class="pg-shine" cx="94" cy="56.5" r="1.4" fill="#fff"/>
+                </g>
+              </g>
+              <path class="pg-beak" d="M72 70 q8 -4 16 0 q-8 10 -16 0z" fill="#f59e0b"/>
+              <path class="pg-mouth" d="M74 80 q6 5 12 0" stroke="#1f2937" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <ellipse class="pg-flip pg-flip-l" cx="30" cy="108" rx="10" ry="27" fill="#111827"/>
+              <ellipse class="pg-flip pg-flip-r" cx="130" cy="108" rx="10" ry="27" fill="#111827"/>
+            </g>
+            <path class="pg-sweat" d="M118 34 q6 9 0 12 q-6 -3 0 -12z" fill="#7dd3fc"/>
+          </g>
+        </svg>
+      </div>
+
+      <h1><span class="logo" aria-hidden="true">◎</span> JobRadar</h1>
       <p class="hint">Acceso privado. Ingresa la contraseña de la aplicación.</p>
+
       <label for="password">Contraseña</label>
-      <input id="password" name="password" type="password" required autocomplete="current-password" autofocus>
-      <button class="btn primary big" type="submit">Ingresar</button>
+      <div class="pw-field">
+        <input id="password" name="password" type="password" required autocomplete="current-password" autofocus
+               aria-describedby="caps err" spellcheck="false">
+        <button type="button" id="togglePw" class="pw-toggle" aria-controls="password" aria-pressed="false"
+                aria-label="Mostrar contraseña">Mostrar</button>
+      </div>
+      <p id="caps" class="caps-warn" hidden>⇪ Bloq Mayús está activado</p>
+
+      <button class="btn primary big" type="submit" id="submit">
+        <span class="spinner" aria-hidden="true"></span><span class="btn-label">Ingresar</span>
+      </button>
       <p id="err" class="error" role="alert"></p>
     </form>
   </main>

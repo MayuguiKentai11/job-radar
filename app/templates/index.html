@@ -14,15 +14,15 @@
   <header class="topbar">
     <a href="/" class="brand" @click.prevent="newSearch()" title="Nueva búsqueda"><span class="logo" aria-hidden="true">◎</span> JobRadar <small>Perú</small></a>
     <nav class="tabs">
-      <button :class="{active: tab==='buscar'}" @click="tab='buscar'">Buscar</button>
-      <button :class="{active: tab==='resultados'}" @click="tab='resultados'">Resultados <span class="pill" x-show="results.length" x-text="results.length"></span></button>
-      <button :class="{active: tab==='mis'}" @click="tab='mis'; loadTracked()">Mis ofertas</button>
-      <button :class="{active: tab==='config'}" @click="tab='config'">Configuración</button>
-      {% if auth_required %}<button @click="logout()" title="Cerrar sesión">Salir</button>{% endif %}
+      <button :class="{active: tab==='buscar'}" :aria-current="tab==='buscar' ? 'page' : null" @click="tab='buscar'">Buscar</button>
+      <button :class="{active: tab==='resultados'}" :aria-current="tab==='resultados' ? 'page' : null" @click="tab='resultados'">Resultados <span class="pill" x-show="results.length" x-text="results.length"></span></button>
+      <button :class="{active: tab==='mis'}" :aria-current="tab==='mis' ? 'page' : null" @click="tab='mis'; loadTracked()">Mis ofertas</button>
+      <button :class="{active: tab==='config'}" :aria-current="tab==='config' ? 'page' : null" @click="tab='config'">Configuración</button>
+      {% if auth_required %}<button class="logout" @click="logout()" title="Cerrar sesión">Salir</button>{% endif %}
     </nav>
   </header>
 
-  <div class="toast" x-show="toast" x-transition x-text="toast"></div>
+  <div class="toast" role="status" aria-live="polite" x-show="toast" x-transition x-text="toast" @click="toast=''"></div>
 
   <!-- ================= BUSCAR ================= -->
   <main x-show="tab==='buscar'" class="page">
@@ -55,11 +55,11 @@
         </div>
         <label>Modalidad <em>vacío = cualquiera</em></label>
         <div class="chips">
-          <template x-for="m in meta.modalities"><button type="button" class="chip" :class="{on: form.modalities.includes(m)}" @click="toggle(form.modalities, m)" x-text="labels.mod[m]"></button></template>
+          <template x-for="m in meta.modalities"><button type="button" class="chip" :class="{on: form.modalities.includes(m)}" :aria-pressed="String(!!(form.modalities.includes(m)))" @click="toggle(form.modalities, m)" x-text="labels.mod[m]"></button></template>
         </div>
         <label>Tipo de jornada</label>
         <div class="chips">
-          <template x-for="t in meta.job_types"><button type="button" class="chip" :class="{on: form.job_types.includes(t)}" @click="toggle(form.job_types, t)" x-text="labels.type[t]"></button></template>
+          <template x-for="t in meta.job_types"><button type="button" class="chip" :class="{on: form.job_types.includes(t)}" :aria-pressed="String(!!(form.job_types.includes(t)))" @click="toggle(form.job_types, t)" x-text="labels.type[t]"></button></template>
         </div>
         <label>Portales</label>
         <div class="sources">
@@ -83,7 +83,7 @@
         <h2><span class="step">B</span> Perfil y condiciones</h2>
         <label>Nivel <em>vacío = cualquiera</em></label>
         <div class="chips">
-          <template x-for="l in meta.levels"><button type="button" class="chip" :class="{on: form.levels.includes(l)}" @click="toggle(form.levels, l)" x-text="labels.level[l]"></button></template>
+          <template x-for="l in meta.levels"><button type="button" class="chip" :class="{on: form.levels.includes(l)}" :aria-pressed="String(!!(form.levels.includes(l)))" @click="toggle(form.levels, l)" x-text="labels.level[l]"></button></template>
         </div>
         <div class="row">
           <div><label>Salario mínimo mensual</label><input type="number" min="0" step="100" x-model.number="form.salary_min" placeholder="ej. 3000"></div>
@@ -106,8 +106,8 @@
         <input type="text" x-model="form.blocked_companiesText" placeholder="Empresa X, Consultora Y">
         <label>Idioma de la oferta</label>
         <div class="chips">
-          <button type="button" class="chip" :class="{on: form.languages.includes('es')}" @click="toggle(form.languages,'es')">Español</button>
-          <button type="button" class="chip" :class="{on: form.languages.includes('en')}" @click="toggle(form.languages,'en')">Inglés</button>
+          <button type="button" class="chip" :class="{on: form.languages.includes('es')}" :aria-pressed="String(!!(form.languages.includes('es')))" @click="toggle(form.languages,'es')">Español</button>
+          <button type="button" class="chip" :class="{on: form.languages.includes('en')}" :aria-pressed="String(!!(form.languages.includes('en')))" @click="toggle(form.languages,'en')">Inglés</button>
         </div>
       </section>
 
@@ -117,8 +117,8 @@
         <label class="inline"><input type="checkbox" x-model="form.ai_match" :disabled="!canUseAI()">
           Analizar afinidad con mi CV usando IA</label>
         <p class="hint" x-show="!canUseAI()">Para usar IA, sube tu CV y tu API key en <a href="#" @click.prevent="tab='config'">Configuración</a>.</p>
-        <button class="btn primary big" type="submit" :disabled="searching">
-          <span x-show="!searching">Buscar ofertas</span><span x-show="searching">Buscando…</span>
+        <button class="btn primary big" type="submit" :disabled="searching" :class="{loading: searching}" :aria-busy="searching">
+          <span class="spinner" aria-hidden="true"></span><span x-show="!searching">Buscar ofertas</span><span x-show="searching">Buscando…</span>
         </button>
 
         <div class="progress" x-show="status">
@@ -158,8 +158,12 @@
   <main x-show="tab==='resultados'" class="page results-page">
     <template x-if="!results.length">
       <div class="empty card">
-        <p x-show="!runId">Aún no hay resultados. Haz una búsqueda en la pestaña <a href="#" @click.prevent="tab='buscar'">Buscar</a>.</p>
-        <p x-show="runId">Esta búsqueda no tiene ofertas que pasen tus filtros. Revisa el resumen y ajusta los filtros.</p>
+        <template x-if="!runId"><div><span class="big-emoji" aria-hidden="true">🔎</span><h2 class="empty-title">Aún no hay resultados</h2>
+          <p class="hint">Completa qué cargo buscas y pulsa «Buscar ofertas». Los resultados aparecerán aquí.</p>
+          <button class="btn primary" @click="tab='buscar'">Ir a Buscar</button></div></template>
+        <template x-if="runId"><div><span class="big-emoji" aria-hidden="true">🫥</span><h2 class="empty-title">Ninguna oferta pasó tus filtros</h2>
+          <p class="hint">Prueba con menos palabras obligatorias o excluyentes, amplía la antigüedad o activa «cargos parecidos».</p>
+          <button class="btn ghost" @click="tab='buscar'">Ajustar la búsqueda</button></div></template>
         <div x-show="summary?.rejected && Object.keys(summary.rejected).length" class="rejected">
           <h3>¿Por qué no aparecen otras ofertas?</h3>
           <template x-for="(n, why) in summary?.rejected || {}"><div><span x-text="why"></span>: <strong x-text="n"></strong></div></template>
@@ -183,15 +187,15 @@
         <select x-model="qf.sort"><option value="score">Más relevantes</option><option value="ai">Afinidad con mi CV (IA)</option><option value="date">Más recientes</option><option value="salary">Salario</option></select>
         <label>Portal</label>
         <div class="chips small">
-          <template x-for="s in resultSources"><button type="button" class="chip" :class="{on: qf.sources.includes(s)}" @click="toggle(qf.sources, s)" x-text="sourceLabel(s)"></button></template>
+          <template x-for="s in resultSources"><button type="button" class="chip" :class="{on: qf.sources.includes(s)}" :aria-pressed="String(!!(qf.sources.includes(s)))" @click="toggle(qf.sources, s)" x-text="sourceLabel(s)"></button></template>
         </div>
         <label>Modalidad</label>
         <div class="chips small">
-          <template x-for="m in meta.modalities"><button type="button" class="chip" :class="{on: qf.modalities.includes(m)}" @click="toggle(qf.modalities, m)" x-text="labels.mod[m]"></button></template>
+          <template x-for="m in meta.modalities"><button type="button" class="chip" :class="{on: qf.modalities.includes(m)}" :aria-pressed="String(!!(qf.modalities.includes(m)))" @click="toggle(qf.modalities, m)" x-text="labels.mod[m]"></button></template>
         </div>
         <label>Estado</label>
         <div class="chips small">
-          <template x-for="st in meta.statuses"><button type="button" class="chip" :class="{on: qf.statuses.includes(st)}" @click="toggle(qf.statuses, st)" x-text="labels.status[st]"></button></template>
+          <template x-for="st in meta.statuses"><button type="button" class="chip" :class="{on: qf.statuses.includes(st)}" :aria-pressed="String(!!(qf.statuses.includes(st)))" @click="toggle(qf.statuses, st)" x-text="labels.status[st]"></button></template>
         </div>
         <label class="inline"><input type="checkbox" x-model="qf.onlyNew"> Solo nuevas</label>
         <label class="inline"><input type="checkbox" x-model="qf.withSalary"> Solo con salario</label>
@@ -199,7 +203,7 @@
         <div class="actions">
           <button class="btn ghost" @click="exportRows('xlsx')">Exportar Excel</button>
           <button class="btn ghost" @click="exportRows('csv')">CSV</button>
-          <button class="btn ghost" @click="runAI()" :disabled="aiRunning" x-text="aiRunning ? 'Analizando con IA…' : 'Analizar top con IA'"></button>
+          <button class="btn ghost" @click="runAI()" :disabled="aiRunning" :class="{loading: aiRunning}"><span class="spinner" aria-hidden="true"></span><span x-text="aiRunning ? 'Analizando con IA…' : 'Analizar top con IA'"></span></button>
         </div>
         <details x-show="summary?.rejected && Object.keys(summary.rejected).length" class="rejected">
           <summary>¿Por qué no aparecen otras ofertas?</summary>
@@ -208,8 +212,12 @@
       </aside>
 
       <section class="list">
+        <div class="card empty" x-show="!filtered.length">
+          <p>Ninguna oferta coincide con los filtros de esta columna.</p>
+          <button class="btn ghost" @click="clearQuickFilters()">Limpiar filtros</button>
+        </div>
         <template x-for="j in filtered" :key="j.id">
-          <article class="job card" :class="{selected: sel && sel.id===j.id, discarded: j.status==='descartada'}" @click="select(j)">
+          <article class="job card" tabindex="0" role="button" :aria-pressed="String(!!(sel && sel.id===j.id))" :class="{selected: sel && sel.id===j.id, discarded: j.status==='descartada'}" @click="select(j)" @keydown.enter.prevent="select(j)" @keydown.space.prevent="select(j)">
             <div class="jmain">
               <div class="jtitle"><span x-text="j.title"></span> <span class="tag new" x-show="j.is_new">nueva</span></div>
               <div class="jmeta">
@@ -230,14 +238,15 @@
         </template>
       </section>
 
-      <section class="detail card" x-show="sel">
+      <div class="detail-backdrop" x-show="sel" @click="sel=null" aria-hidden="true"></div>
+      <section class="detail card" x-show="sel" role="region" aria-label="Detalle de la oferta" @keydown.escape.window="sel=null">
         <template x-if="sel">
           <div>
-            <button class="close" @click="sel=null" aria-label="Cerrar">✕</button>
+            <button class="close" @click="sel=null" aria-label="Cerrar detalle (Esc)" title="Cerrar (Esc)">✕</button>
             <h2 x-text="sel.title"></h2>
             <div class="jmeta"><strong x-text="sel.company || '—'"></strong> · <span x-text="sel.location || '—'"></span> · <span x-text="portalText(sel)"></span></div>
             <div class="status-bar">
-              <template x-for="st in meta.statuses"><button class="chip" :class="{on: sel.status===st}" @click="setStatus(sel, st)" x-text="labels.status[st]"></button></template>
+              <template x-for="st in meta.statuses"><button class="chip" :class="{on: sel.status===st}" :aria-pressed="String(!!(sel.status===st))" @click="setStatus(sel, st)" x-text="labels.status[st]"></button></template>
             </div>
             <a class="btn primary" :href="safeUrl(sel.url)" target="_blank" rel="noopener noreferrer">Ver oferta y postular ↗</a>
             <div class="why">
@@ -265,7 +274,13 @@
 
   <!-- ================= MIS OFERTAS ================= -->
   <main x-show="tab==='mis'" class="page">
-    <div class="kanban">
+    <div class="empty-hero card" x-show="!tracked.length">
+      <span class="big-emoji" aria-hidden="true">🗂️</span>
+      <h2>Aún no sigues ninguna oferta</h2>
+      <p class="hint">En <strong>Resultados</strong>, abre una oferta y márcala como «Interesante», «Postulé» o «Entrevista». Aparecerá aquí para que lleves el control de tus postulaciones.</p>
+      <button class="btn primary" @click="tab = results.length ? 'resultados' : 'buscar'" x-text="results.length ? 'Ir a mis resultados' : 'Hacer una búsqueda'"></button>
+    </div>
+    <div class="kanban" x-show="tracked.length">
       <template x-for="st in ['interesante','postulada','entrevista','descartada']" :key="st">
         <div class="col card">
           <h3><span x-text="labels.status[st]"></span> <span class="pill" x-text="tracked.filter(j=>j.status===st).length"></span></h3>

@@ -109,6 +109,8 @@ window.jobradar = function () {
       await this.loadSettings();
       this.form.sources = this.defaultSources();
       this.loadRuns();
+      // changing tabs starts at the top of the new page
+      this.$watch("tab", () => { this.sel = null; window.scrollTo({ top: 0 }); });
     },
 
     notify(msg) { this.toast = msg; clearTimeout(this._t); this._t = setTimeout(() => (this.toast = ""), 4000); },
@@ -203,6 +205,7 @@ window.jobradar = function () {
     },
     clearCV() { this.cv = null; store.del("cv"); this.notify("CV eliminado de este navegador"); },
     async wipeAll() {
+      if (!window.confirm("¿Borrar búsquedas, perfiles, notas, CV y API keys de este navegador? No se puede deshacer.")) return;
       store.clearAll();
       try { await api("/api/settings", { method: "POST", body: { clear_api_key: true } }); } catch (_) { /* ignore */ }
       this.notify("Datos borrados"); setTimeout(() => window.location.reload(), 600);
@@ -238,6 +241,8 @@ window.jobradar = function () {
       this.notify("Perfil guardado");
     },
     deleteProfile() {
+      const pr = this.profiles.find(p => String(p.id) === String(this.profileId));
+      if (pr && !window.confirm(`¿Eliminar el perfil «${pr.name}»?`)) return;
       this.profiles = this.profiles.filter(p => String(p.id) !== String(this.profileId));
       store.set("profiles", this.profiles); this.profileId = ""; this.profileName = ""; this.notify("Perfil eliminado");
     },
@@ -331,6 +336,9 @@ window.jobradar = function () {
       return out.sort((a, b) => (key(b) > key(a) ? 1 : key(b) < key(a) ? -1 : b.score - a.score));
     },
     select(j) { this.sel = j; },
+    clearQuickFilters() {
+      Object.assign(this.qf, { text: "", sources: [], modalities: [], statuses: [], onlyNew: false, withSalary: false, hideDiscarded: true });
+    },
     highlight(text) {
       // escape first, then add our own <mark> tags: scraped HTML is never interpreted
       let html = escapeHtml(text || "Sin descripción disponible. Abre la oferta para ver el detalle.");
