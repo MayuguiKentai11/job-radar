@@ -301,7 +301,7 @@ mark.bad { background: var(--bad-soft); color: var(--bad); padding: 0 2px; borde
 @keyframes pg-shake { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(-8deg); } 40% { transform: rotate(7deg); } 60% { transform: rotate(-5deg); } 80% { transform: rotate(3deg); } }
 @keyframes pg-jump { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-16px) scale(1.03, .97); } }
 @keyframes pg-giggle { 50% { transform: translateY(-3px) rotate(-1.5deg); } }
-@keyframes pg-wave { 0%, 100% { transform: rotate(-150deg); } 25%, 75% { transform: rotate(-115deg); } 50% { transform: rotate(-150deg); } }
+@keyframes pg-wave { 20%, 80% { transform: rotate(-150deg); } 40% { transform: rotate(-112deg); } 60% { transform: rotate(-150deg); } 70% { transform: rotate(-120deg); } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
@@ -313,3 +313,4 @@ mark.bad { background: var(--bad-soft); color: var(--bad); padding: 0 2px; borde
 .empty .empty-title { justify-content: center; }
 .empty .hint { max-width: 440px; margin: 6px auto 14px; }
 .empty-hero h2 { justify-content: center; }
+.penguin-bubble { min-height: calc(2.9em + 14px); display: flex; align-items: center; justify-content: center; }

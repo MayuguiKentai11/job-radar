@@ -74,8 +74,48 @@
   pw.addEventListener("keydown", capsCheck);
   pw.addEventListener("keyup", capsCheck);
 
-  // tapping the penguin makes it wave (pure fun)
+  // ---------- click on Pingu: wave + random funny line ----------
+  // weight = relative chance; cupid lines weigh 1.5 vs 1 → ~60% of clicks are cupid lines
+  const CLICK_LINES = [
+    { w: 1.5, t: "Soy cupido, pero con aletas 💘" },
+    { w: 1.5, t: "Mi flecha no falla: primero los junté a ustedes, ahora te consigo chamba 🏹" },
+    { w: 1.5, t: "Unir parejas, listo ✅. Encontrar trabajo, en proceso…" },
+    { w: 1.5, t: "El amor y las buenas ofertas llegan cuando menos lo esperas 💌" },
+    { w: 1.5, t: "Este pingüino tiene historial de éxito en asuntos del corazón 😏" },
+    { w: 1, t: "¡No me toques, que me derrito! 🧊" },
+    { w: 1, t: "Un clic más y te pido sueldo 💸" },
+    { w: 1, t: "Pingüino que no busca chamba, se lo lleva la corriente 🌊" },
+    { w: 1, t: "¿Me haces cosquillas o me estás contratando?" },
+    { w: 1, t: "Te salvo la vida en las películas de terror… y en LinkedIn." },
+  ];
+  // shown instead when someone clicks a lot in a short time
+  const SPAM_LINES = ["Ya, ya, ¡me vas a desplumar! 🪶", "Sigue así y llamo a Pinguinator 📞"];
+  const SPAM_CLICKS = 5, SPAM_WINDOW_MS = 3000;
+  const recentLines = []; // last lines said, never repeated right away
+  let clickTimes = [];
+
+  function weightedPick(items) {
+    const pool = items.filter((it) => !recentLines.includes(it.t));
+    const list = pool.length ? pool : items;
+    let r = Math.random() * list.reduce((s, it) => s + it.w, 0);
+    for (const it of list) { r -= it.w; if (r < 0) return it.t; }
+    return list[list.length - 1].t;
+  }
+
+  function say(text) {
+    recentLines.push(text);
+    if (recentLines.length > 3) recentLines.shift();
+    bubble.textContent = text;
+    bubble.classList.remove("pop"); void bubble.offsetWidth; bubble.classList.add("pop");
+  }
+
   penguin.parentElement.addEventListener("click", () => {
+    const now = Date.now();
+    clickTimes = clickTimes.filter((t) => now - t < SPAM_WINDOW_MS);
+    clickTimes.push(now);
+    const spam = clickTimes.length >= SPAM_CLICKS;
+    if (spam) clickTimes = []; // reset so the spam line doesn't fire on every following click
+    say(spam ? weightedPick(SPAM_LINES.map((t) => ({ w: 1, t }))) : weightedPick(CLICK_LINES));
     penguin.classList.remove("wave"); void penguin.getBoundingClientRect(); penguin.classList.add("wave");
   });
 
